@@ -1,7 +1,7 @@
 
 #ifndef EXAMPLE_MOVEMENT_H
 #define EXAMPLE_MOVEMENT_H
-#include "constantValues.h"
+#include "../constantValues.h"
 #include "raylib.h"
 #include "raymath.h"
 

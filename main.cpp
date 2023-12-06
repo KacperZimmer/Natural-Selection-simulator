@@ -1,7 +1,7 @@
 #include <iostream>
 #include "raylib.h"
 #include "include/constantValues.h"
-#include "include/creature.h"
+#include "include/CreatureIncludes/creature.h"
 #define RAYGUI_IMPLEMENTATION
 #include "include/raygui.h"
 
