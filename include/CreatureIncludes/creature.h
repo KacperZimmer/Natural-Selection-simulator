@@ -3,7 +3,7 @@
 #define EXAMPLE_CREATURE_H
 #include "raylib.h"
 #include <raymath.h>
-#include "constantValues.h"
+#include "../constantValues.h"
 #include "movement.h"
 
 

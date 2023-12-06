@@ -1,6 +1,6 @@
 
-#include "../include/constantValues.h"
-#include "../include/movement.h"
+#include "../../include/constantValues.h"
+#include "../../include/CreatureIncludes/movement.h"
 #include <random>
 
 const Vector2& Movement::getPosition() const {

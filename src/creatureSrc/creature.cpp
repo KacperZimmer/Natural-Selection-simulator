@@ -1,12 +1,12 @@
 #include <random>
 #include <iostream>
-#include "../include/creature.h"
-#include "../include/constantValues.h"
+#include "../../include/CreatureIncludes/creature.h"
+#include "../../include/constantValues.h"
 
 
 void Creature::render(bool highlightVision) {
     movement.move();
-    DrawCircle(movement.getPosition().x, movement.getPosition().y,20, BLUE);
+    DrawCircle(movement.getPosition().x, movement.getPosition().y,this->radiusCreature:q, BLUE);
 }
 
 
