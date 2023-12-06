@@ -6,11 +6,7 @@
 #include "include/raygui.h"
 
 
-void renderCreatures(std::vector<Creature> creatureVector, bool highlightVision){
-    for(Creature creature : creatureVector){
-        creature.render(true)
-    }
-}
+
 int main() {
 
 
