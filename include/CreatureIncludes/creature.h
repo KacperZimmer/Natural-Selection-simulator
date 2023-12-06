@@ -5,6 +5,7 @@
 #include <raymath.h>
 #include "../constantValues.h"
 #include "movement.h"
+#include "seeing.h"
 
 
 class Creature {
@@ -14,21 +15,21 @@ private:
     float moveSpeed{1.f};
     float seeingRadius{20.f};
     Movement movement{0.f};
+    Seeing eyes{{}};
 
 public:
 
-    Creature(){
-        this->movement.setCreatureRadius(radiusCreature);
-    }
+
     Creature(float x, float y, float radius) : radiusCreature{radius}{
         movement.setCreatureRadius(this->radiusCreature);
         movement.setInitialCreaturePosVector(x,y);
+
     }
 
 
     void render(bool highlightVision);
-
-
+    void turnOnVision();
+    void turnOffVision();
 };
 
 
