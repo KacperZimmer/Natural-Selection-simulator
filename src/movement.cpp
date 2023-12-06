@@ -1,6 +1,3 @@
-//
-// Created by Kacper Zimmer on 06/12/2023.
-//
 
 #include "../include/constantValues.h"
 #include "../include/movement.h"
@@ -16,6 +13,9 @@ void Movement::move() {
     goBackToLegalPositionIfOutOfBound();
 
     this->deltaTime = GetFrameTime();
+
+    this->shouldUpdatePosition += deltaTime;
+
     if(this->shouldUpdatePosition >= this->timeAfterPositionShouldBeUpdated){
         this->shouldUpdatePosition = 0.f;
 
@@ -54,6 +54,15 @@ void Movement::goToTarget(Vector2 target) {
 
     this->currentPosition.x += direction.x;
     this->currentPosition.y += direction.y;
+}
+
+void Movement::setCreatureRadius(float creatureRadius) {
+   this->creatureRadius = creatureRadius;
+}
+
+void Movement::setInitialCreaturePosVector(float x, float y) {
+    this->currentPosition.x = x;
+    this->currentPosition.y = y;
 }
 
 

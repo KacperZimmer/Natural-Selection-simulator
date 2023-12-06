@@ -18,7 +18,6 @@ private:
 
 
 
-    void move();
     void goToTarget(Vector2 target);
 
     bool isOutOfBound();
@@ -26,9 +25,14 @@ private:
 
     int generateRandomDirection();
 
-
 public:
     const Vector2& getPosition() const;
+    Movement(float radius){
+        this->creatureRadius = radius;
+    }
+    void move();
+    void setCreatureRadius(float creatureRadius);
+    void setInitialCreaturePosVector(float x, float y);
 };
 
 
