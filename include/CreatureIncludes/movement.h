@@ -2,8 +2,8 @@
 #ifndef EXAMPLE_MOVEMENT_H
 #define EXAMPLE_MOVEMENT_H
 #include "../constantValues.h"
+#include "../../include/constantValues.h"
 #include "raylib.h"
-#include "raymath.h"
 
 class Movement {
 private:

@@ -1,34 +1,26 @@
-#include <random>
-#include <iostream>
 #include "../../include/CreatureIncludes/creature.h"
-#include "../../include/constantValues.h"
 
 
-void Creature::render(bool highlightVision) {
-    movement.move();
-    DrawCircle(movement.getPosition().x, movement.getPosition().y,this->radiusCreature:q, BLUE);
+void Creature::turnOnVision() {
+    bool currentState = !this->eyes.ShouldDisplayVisionRange();
+    this->eyes.setShouldDisplayVisionRange(currentState);
+
+
+}
+void Creature::render() {
+
+    this->movement.move();
+    this->eyes.setHightlightPositionVector(this->movement.getPosition());
+
+    if(eyes.ShouldDisplayVisionRange()){
+        eyes.highlightVisionRange();
+    }
+    DrawCircle(static_cast<int>(movement.getPosition().x), static_cast<int>(movement.getPosition().y),this->radiusCreature, BLUE);
 }
 
 
 
 
 
-//void Creature::visualizeSeeing(bool shouldRender) {
-//    if(shouldRender) {
-//        DrawLine(this->creaturePosVector.x, this->creaturePosVector.y, creaturePosVector.x + 20 * xDirection,
-//                 creaturePosVector.y + 30 * yDirection, Color{255, 0, 0, 255});
-//        DrawCircle(this->creaturePosVector.x, this->creaturePosVector.y, 40.f, Color{116, 45, 255, 128});
-//    }
-//}
 
-//void Creature::manageLifeCycle(bool renderSeeing) {
-//
-//    /*
-//     * function takes care of proper rendering parts of the creatures
-//     * and takes care of behaviour such as detecting food, going to certain target
-//     */
-//
-//    DrawCircle(static_cast<int>(this->creaturePosVector.x),static_cast<int>(this->creaturePosVector.y), this->radiusCreature, BLUE);
-//    move(a);
-//    visualizeSeeing(renderSeeing);
-//}
+

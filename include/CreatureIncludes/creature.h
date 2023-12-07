@@ -1,10 +1,13 @@
 
 #ifndef EXAMPLE_CREATURE_H
 #define EXAMPLE_CREATURE_H
-#include "raylib.h"
-#include <raymath.h>
+#include <iostream>
+
 #include "../constantValues.h"
+#include "raylib.h"
 #include "movement.h"
+#include "seeing.h"
+
 
 
 class Creature {
@@ -14,21 +17,20 @@ private:
     float moveSpeed{1.f};
     float seeingRadius{20.f};
     Movement movement{0.f};
+    Seeing eyes{{}};
 
 public:
 
-    Creature(){
-        this->movement.setCreatureRadius(radiusCreature);
-    }
+
     Creature(float x, float y, float radius) : radiusCreature{radius}{
         movement.setCreatureRadius(this->radiusCreature);
         movement.setInitialCreaturePosVector(x,y);
+
     }
 
 
-    void render(bool highlightVision);
-
-
+    void render();
+    void turnOnVision();
 };
 
 
