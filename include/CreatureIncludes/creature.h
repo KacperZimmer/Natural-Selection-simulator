@@ -1,11 +1,13 @@
 
 #ifndef EXAMPLE_CREATURE_H
 #define EXAMPLE_CREATURE_H
-#include "raylib.h"
-#include <raymath.h>
+#include <iostream>
+
 #include "../constantValues.h"
+#include "raylib.h"
 #include "movement.h"
 #include "seeing.h"
+
 
 
 class Creature {
@@ -27,9 +29,8 @@ public:
     }
 
 
-    void render(bool highlightVision);
+    void render();
     void turnOnVision();
-    void turnOffVision();
 };
 
 

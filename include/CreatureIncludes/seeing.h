@@ -8,7 +8,6 @@
 class Seeing {
 private:
     Vector2 hightlightPositionVector{};
-    bool shouldDisplayVectorDirection{false};
     bool shouldDisplayVisionRange{false};
     float seeingRange{20.f};
 public:
@@ -17,18 +16,11 @@ public:
     }
 
     void setHightlightPositionVector(const Vector2 &hightlightPositionVector);
-
-    bool isShouldDisplayVectorDirection() const;
-
-    bool isShouldDisplayVisionRange() const;
+    void setShouldDisplayVisionRange(bool shouldDisplayVisionRange);
 
     void highlightVisionRange();
-
     bool ShouldDisplayVisionRange() const;
-    bool ShouldDisplayVectorDirection() const;
 
-    void setShouldDisplayVectorDirection(bool shouldDisplayVectorDirection);
-    void setShouldDisplayVisionRange(bool shouldDisplayVisionRange);
 };
 
 

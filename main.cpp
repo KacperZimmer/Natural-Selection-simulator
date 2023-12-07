@@ -1,6 +1,4 @@
 #include <iostream>
-#include "raylib.h"
-#include "include/constantValues.h"
 #include "include/CreatureIncludes/creature.h"
 #define RAYGUI_IMPLEMENTATION
 #include "include/raygui.h"
@@ -27,11 +25,13 @@ Creature creature{SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2, 10};
         ClearBackground(WHITE);
         GuiLoadStyleDefault();
 
-        if(GuiButton(Rectangle{SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,100,100},"wizja")){
-            creature.turnOnVision();
+        if(GuiButton(Rectangle{0.f, SCREEN_HEIGHT - 50,120,50},"Highlight Vision")){
+            for(int i = 0; i < 5; i++){
+                creaturtable[i].turnOnVision();
+            }
         }
         for(int i = 0; i < 5; i++){
-            creaturtable[i].render(true);
+            creaturtable[i].render();
         }
 
         EndDrawing();
