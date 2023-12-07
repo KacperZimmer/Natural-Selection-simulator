@@ -2,6 +2,7 @@
 #include "include/CreatureIncludes/creature.h"
 #define RAYGUI_IMPLEMENTATION
 #include "include/raygui.h"
+#include "include/Food.h"
 
 
 
@@ -9,18 +10,18 @@ int main() {
 
 
     std::vector<Creature> creaturtable{};
-
+    Food food{5.f};
     creaturtable.reserve(5);
 for(int i = 0; i < 5; ++i){
         creaturtable.emplace_back(SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2, 10);
     }
 
-Creature creature{SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2, 10};
-
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT,"Selection simulator");
 
     SetTargetFPS(60);
     while(!WindowShouldClose()){
+        food.render();
+
         BeginDrawing();
         ClearBackground(WHITE);
         GuiLoadStyleDefault();
