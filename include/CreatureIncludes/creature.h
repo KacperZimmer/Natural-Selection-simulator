@@ -18,6 +18,9 @@ private:
     float seeingRadius{20.f};
     Movement movement{0.f};
     Seeing eyes{{}};
+    double energy{1000};
+    Color deadColor{0,0,0 };
+    Color aliveColor{BLUE};
 
 public:
 
@@ -28,7 +31,9 @@ public:
 
     }
 
+    double getEnergy() const;
 
+    double calcEnergyLoss() const;
     void render();
     void turnOnVision();
 };

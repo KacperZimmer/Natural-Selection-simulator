@@ -7,12 +7,13 @@
 
 
 int main() {
-
+    // TODO clean up the mess here when finished with most of logic
 
     std::vector<Creature> creaturtable{};
     Food food{5.f};
     creaturtable.reserve(5);
-for(int i = 0; i < 5; ++i){
+
+    for(int i = 0; i < 5; ++i){
         creaturtable.emplace_back(SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2, 10);
     }
 
@@ -21,7 +22,7 @@ for(int i = 0; i < 5; ++i){
     SetTargetFPS(60);
     while(!WindowShouldClose()){
         food.render();
-
+        std::cout << creaturtable[0].getEnergy() << std::endl;
         BeginDrawing();
         ClearBackground(WHITE);
         GuiLoadStyleDefault();
