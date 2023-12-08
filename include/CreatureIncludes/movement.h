@@ -20,10 +20,9 @@ private:
 
     void goToTarget(Vector2 target);
 
-    bool isOutOfBound();
     void goBackToLegalPositionIfOutOfBound();
 
-    int generateRandomDirection();
+    int generateRandomDirection() const;
 
 public:
     const Vector2& getPosition() const;
