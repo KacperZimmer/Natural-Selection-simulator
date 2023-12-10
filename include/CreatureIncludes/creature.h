@@ -8,6 +8,7 @@
 #include "movement.h"
 #include "seeing.h"
 
+#include "foodInclude/foodContainer.h"
 
 
 class Creature {
@@ -19,8 +20,6 @@ private:
     Movement movement{0.f};
     Seeing eyes{{}};
     double energy{1000};
-    Color deadColor{0,0,0 };
-    Color aliveColor{BLUE};
 
 public:
 
@@ -36,6 +35,7 @@ public:
     double calcEnergyLoss() const;
     void render();
     void turnOnVision();
+    void update(const FoodContainer& foodContainer);
 };
 
 

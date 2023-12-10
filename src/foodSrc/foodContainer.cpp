@@ -1,5 +1,5 @@
 
-#include "../include/CreatureIncludes/foodContainer.h"
+#include "../../include/CreatureIncludes/foodInclude/foodContainer.h"
 
 void FoodContainer::generateFood(int quantity) {
     for(int i = 0; i < quantity; ++i){
@@ -7,7 +7,7 @@ void FoodContainer::generateFood(int quantity) {
     }
 }
 
-const std::vector<std::shared_ptr<Food>> &FoodContainer::getFoodArray() const{
+const std::vector<std::unique_ptr<Food>> &FoodContainer::getFoodArray() const{
     return this->foodVector;
 }
 

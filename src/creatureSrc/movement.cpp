@@ -70,4 +70,3 @@ void Movement::setInitialCreaturePosVector(float x, float y) {
 
 
 
-

@@ -1,6 +1,6 @@
 #include <random>
-#include "../include/Food.h"
-#include "../include/constantValues.h"
+#include "../../include/CreatureIncludes/foodInclude/Food.h"
+#include "../../include/constantValues.h"
 
 std::random_device rd;
 std::mt19937 gen(rd());

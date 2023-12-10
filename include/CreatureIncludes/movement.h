@@ -4,6 +4,7 @@
 #include "../constantValues.h"
 #include "../../include/constantValues.h"
 #include "raylib.h"
+#include <vector>
 
 class Movement {
 private:
@@ -16,12 +17,8 @@ private:
     int xDirection{1};
     int yDirection{1};
 
-
-
     void goToTarget(Vector2 target);
-
     void goBackToLegalPositionIfOutOfBound();
-
     int generateRandomDirection() const;
 
 public:
