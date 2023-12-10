@@ -8,7 +8,7 @@ class Food {
 
 private:
     Vector2 position{};
-    float foodRadius{};
+    float foodRadius{1.f};
     float xPos{};
     float yPos{};
 
