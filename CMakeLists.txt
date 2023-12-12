@@ -27,7 +27,7 @@ endif()
 
 # Our Project
 
-add_executable(${PROJECT_NAME} main.cpp src/creatureSrc/creature.cpp include/raygui.h include/CreatureIncludes/movement.h src/creatureSrc/movement.cpp src/creatureSrc/seeing.cpp)
+add_executable(${PROJECT_NAME} main.cpp src/creatureSrc/creature.cpp include/raygui.h include/CreatureIncludes/movement.h src/creatureSrc/movement.cpp src/creatureSrc/seeing.cpp include/CreatureIncludes/foodInclude/Food.h src/foodSrc/Food.cpp include/CreatureIncludes/foodInclude/foodContainer.h src/foodSrc/foodContainer.cpp)
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)
 

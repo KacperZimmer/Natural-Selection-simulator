@@ -2,8 +2,9 @@
 #ifndef EXAMPLE_SEEING_H
 #define EXAMPLE_SEEING_H
 #include <raylib.h>
-
-
+#include <vector>
+#include "foodInclude/Food.h"
+#include <memory>
 
 class Seeing {
 private:
@@ -14,6 +15,7 @@ public:
     Seeing(const Vector2& posToDrawIn){
         this->hightlightPositionVector = posToDrawIn;
     }
+    bool isFoodInRange(const std::vector<std::unique_ptr<Food>>& foodVector);
 
     void setHightlightPositionVector(const Vector2 &hightlightPositionVector);
     void setShouldDisplayVisionRange(bool shouldDisplayVisionRange);

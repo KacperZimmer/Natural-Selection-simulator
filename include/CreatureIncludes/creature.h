@@ -8,6 +8,7 @@
 #include "movement.h"
 #include "seeing.h"
 
+#include "foodInclude/foodContainer.h"
 
 
 class Creature {
@@ -18,6 +19,7 @@ private:
     float seeingRadius{20.f};
     Movement movement{0.f};
     Seeing eyes{{}};
+    double energy{1000};
 
 public:
 
@@ -28,9 +30,12 @@ public:
 
     }
 
+    double getEnergy() const;
 
+    double calcEnergyLoss() const;
     void render();
     void turnOnVision();
+    void update(const FoodContainer& foodContainer);
 };
 
 
