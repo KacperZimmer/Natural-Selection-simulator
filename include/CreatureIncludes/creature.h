@@ -31,7 +31,6 @@ public:
     }
 
     double getEnergy() const;
-
     double calcEnergyLoss() const;
     void render();
     void turnOnVision();

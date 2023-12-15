@@ -13,6 +13,7 @@ void Creature::render() {
 }
 
 double Creature::calcEnergyLoss() const {
+    //kinetic energy formula scaled by scale factor
     return (pow(this->radiusCreature, 3) * pow(this->moveSpeed,2) ) / 700;
 }
 
@@ -21,7 +22,11 @@ double Creature::getEnergy() const {
 }
 
 void Creature::update(FoodContainer& foodContainer) {
+
+
     //TO DO consider using state design pattern in future
+
+
     int nearestFoodPosition = this->eyes.isFoodInRange(foodContainer.getFoodArray());
 
     if(nearestFoodPosition != -1){
