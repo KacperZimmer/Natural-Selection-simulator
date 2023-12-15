@@ -38,4 +38,4 @@ public:
 };
 
 
-#endif //EXAMPLE_CREATURE_H
+#endif

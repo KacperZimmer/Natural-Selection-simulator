@@ -3,10 +3,12 @@
 
 #include <iostream>
 #include "raymath.h"
+
+using namespace std;
 void Seeing::highlightVisionRange() {
 
     if(this->shouldDisplayVisionRange){
-        DrawCircle(this->hightlightPositionVector.x, this->hightlightPositionVector.y, 30.f, Color{25, 102, 209,125});
+        DrawCircle(static_cast<int>(this->hightlightPositionVector.x), static_cast<int>(this->hightlightPositionVector.y), 30.f, Color{25, 102, 209,125});
     }
 }
 
@@ -24,7 +26,7 @@ bool Seeing::ShouldDisplayVisionRange() const {
 
 int Seeing::isFoodInRange(const std::vector<std::unique_ptr<Food>> &foodVector) const{
 
-    for( int i = 0; i < foodVector.size(); ++i){
+    for(int i = 0; i < foodVector.size(); ++i){
         if(foodVector[i] && Vector2Distance(foodVector[i]->getPosition(), this->hightlightPositionVector) <= 0 + this->seeingRange + foodVector[i]->getFoodRadius() * 2){
             return i;
         }
