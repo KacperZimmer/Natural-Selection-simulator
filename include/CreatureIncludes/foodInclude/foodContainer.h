@@ -10,6 +10,7 @@ private:
 public:
     void generateFood(int quantity);
     std::vector<std::unique_ptr<Food>>& getFoodArray() ;
+    const Vector2& getVectorAtIndex(int index);
     void renderContainer();
     void deleteFood(int x);
 };

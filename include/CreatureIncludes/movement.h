@@ -17,7 +17,6 @@ private:
     int xDirection{1};
     int yDirection{1};
 
-    void goToTarget(Vector2 target);
     void goBackToLegalPositionIfOutOfBound();
     int generateRandomDirection() const;
 
@@ -29,6 +28,8 @@ public:
     void move();
     void setCreatureRadius(float creatureRadius);
     void setInitialCreaturePosVector(float x, float y);
+
+    bool goToTarget(const Vector2& target);
 };
 
 

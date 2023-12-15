@@ -8,7 +8,7 @@ using namespace std;
 void Seeing::highlightVisionRange() {
 
     if(this->shouldDisplayVisionRange){
-        DrawCircle(static_cast<int>(this->hightlightPositionVector.x), static_cast<int>(this->hightlightPositionVector.y), 30.f, Color{25, 102, 209,125});
+        DrawCircle(static_cast<int>(this->hightlightPositionVector.x), static_cast<int>(this->hightlightPositionVector.y), this->seeingRange, Color{25, 102, 209,125});
     }
 }
 

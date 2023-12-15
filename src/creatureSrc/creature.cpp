@@ -24,22 +24,29 @@ double Creature::getEnergy() const {
 void Creature::update(FoodContainer& foodContainer) {
 
 
-    //TO DO consider using state design pattern in future
+    //TODO consider using state design pattern in future
+
+    //TODO change the name of function below is not obvious what it does
+    this->eyes.setHightlightPositionVector(this->movement.getPosition());
 
 
     int nearestFoodPosition = this->eyes.isFoodInRange(foodContainer.getFoodArray());
 
     if(nearestFoodPosition != -1){
-        foodContainer.deleteFood(nearestFoodPosition);
+        if(this->movement.goToTarget(foodContainer.getVectorAtIndex(nearestFoodPosition))){
+            foodContainer.deleteFood(nearestFoodPosition);
+        }
+
+    }else{
+        this->movement.move();
     }
 
-    this->movement.move();
-    this->energy -= calcEnergyLoss();
     if(eyes.ShouldDisplayVisionRange()){
         eyes.highlightVisionRange();
-        this->eyes.setHightlightPositionVector(this->movement.getPosition());
 
     }
+    this->energy -= calcEnergyLoss();
+
 
 
 }
