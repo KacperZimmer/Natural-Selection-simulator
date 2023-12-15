@@ -35,7 +35,7 @@ public:
     double calcEnergyLoss() const;
     void render();
     void turnOnVision();
-    void update(const FoodContainer& foodContainer);
+    void update(FoodContainer& foodContainer);
 };
 
 

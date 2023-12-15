@@ -9,8 +9,9 @@ private:
 
 public:
     void generateFood(int quantity);
-    const std::vector<std::unique_ptr<Food>>& getFoodArray() const;
+    std::vector<std::unique_ptr<Food>>& getFoodArray() ;
     void renderContainer();
+    void deleteFood(int x);
 };
 
 

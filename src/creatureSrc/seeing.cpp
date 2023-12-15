@@ -22,13 +22,17 @@ bool Seeing::ShouldDisplayVisionRange() const {
     return this->shouldDisplayVisionRange;
 }
 
-bool Seeing::isFoodInRange(const std::vector<std::unique_ptr<Food>> &foodVector) {
-    for(const auto& i : foodVector){
+int Seeing::isFoodInRange(std::vector<std::unique_ptr<Food>> &foodVector) {
 
-        if(Vector2Distance(i->getPosition(), this->hightlightPositionVector) <= 0 + this->seeingRange + i->getFoodRadius()){
-            return true;
+    for( int i = 0; i < foodVector.size(); ++i){
+
+        if(foodVector[i] && Vector2Distance(foodVector[i]->getPosition(), this->hightlightPositionVector) <= 0 + this->seeingRange + foodVector[i]->getFoodRadius() * 2){
+            return i;
+
         }
+
+
     }
-    return false;
+    return -1;
 }
 

@@ -7,12 +7,19 @@ void FoodContainer::generateFood(int quantity) {
     }
 }
 
-const std::vector<std::unique_ptr<Food>> &FoodContainer::getFoodArray() const{
+std::vector<std::unique_ptr<Food>> &FoodContainer::getFoodArray(){
     return this->foodVector;
 }
 
 void FoodContainer::renderContainer() {
-    for(const auto& i : this->foodVector){
-        i->render();
+    for(const auto& food : this->foodVector){
+
+        if(food != nullptr){food->render();}
     }
+}
+
+void FoodContainer::deleteFood(int x) {
+
+    std::unique_ptr<Food>& foodToDelete = this->foodVector[x];
+    if(foodToDelete != nullptr){foodToDelete.reset();}
 }

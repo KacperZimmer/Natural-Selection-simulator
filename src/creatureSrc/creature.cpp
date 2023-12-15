@@ -20,14 +20,21 @@ double Creature::getEnergy() const {
     return energy;
 }
 
-void Creature::update(const FoodContainer& foodContainer) {
-    this->eyes.isFoodInRange(foodContainer.getFoodArray());
-    if(eyes.ShouldDisplayVisionRange()){
-        eyes.highlightVisionRange();
+void Creature::update(FoodContainer& foodContainer) {
+    //TO DO consider using state design pattern in future
+    int nearestFoodPosition = this->eyes.isFoodInRange(foodContainer.getFoodArray());
+
+    if(nearestFoodPosition != -1){
+        foodContainer.deleteFood(nearestFoodPosition);
     }
+
     this->movement.move();
     this->energy -= calcEnergyLoss();
-    this->eyes.setHightlightPositionVector(this->movement.getPosition());
+    if(eyes.ShouldDisplayVisionRange()){
+        eyes.highlightVisionRange();
+        this->eyes.setHightlightPositionVector(this->movement.getPosition());
+
+    }
 
 
 }
