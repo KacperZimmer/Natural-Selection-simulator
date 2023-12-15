@@ -1,9 +1,10 @@
 
 #ifndef EXAMPLE_MOVEMENT_H
 #define EXAMPLE_MOVEMENT_H
-#include "constantValues.h"
+#include "../constantValues.h"
+#include "../../include/constantValues.h"
 #include "raylib.h"
-#include "raymath.h"
+#include <vector>
 
 class Movement {
 private:
@@ -16,19 +17,18 @@ private:
     int xDirection{1};
     int yDirection{1};
 
-
-
-    void move();
     void goToTarget(Vector2 target);
-
-    bool isOutOfBound();
     void goBackToLegalPositionIfOutOfBound();
-
-    int generateRandomDirection();
-
+    int generateRandomDirection() const;
 
 public:
     const Vector2& getPosition() const;
+    Movement(float radius){
+        this->creatureRadius = radius;
+    }
+    void move();
+    void setCreatureRadius(float creatureRadius);
+    void setInitialCreaturePosVector(float x, float y);
 };
 
 
