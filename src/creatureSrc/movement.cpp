@@ -52,11 +52,19 @@ void Movement::goBackToLegalPositionIfOutOfBound() {
     }
 }
 
-void Movement::goToTarget(Vector2 target) {
+bool Movement::goToTarget(const Vector2& target) {
+
+
+
     Vector2 direction = Vector2Normalize(Vector2Subtract(target, this->currentPosition));
 
     this->currentPosition.x += direction.x;
     this->currentPosition.y += direction.y;
+
+    if(Vector2Distance(this->currentPosition, target) <= this->creatureRadius){
+        return true;
+    }
+    return false;
 }
 
 void Movement::setCreatureRadius(float creatureRadius) {

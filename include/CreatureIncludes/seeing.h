@@ -10,18 +10,18 @@ class Seeing {
 private:
     Vector2 hightlightPositionVector{};
     bool shouldDisplayVisionRange{false};
-    float seeingRange{20.f};
+    float seeingRange{40.f};
+    float closestDistance{MAXFLOAT};
 public:
     Seeing(const Vector2& posToDrawIn){
         this->hightlightPositionVector = posToDrawIn;
     }
-    int isFoodInRange(std::vector<std::unique_ptr<Food>>& foodVector);
+    int isFoodInRange(const std::vector<std::unique_ptr<Food>>& foodVector);
+    bool ShouldDisplayVisionRange() const;
 
     void setHightlightPositionVector(const Vector2 &hightlightPositionVector);
     void setShouldDisplayVisionRange(bool shouldDisplayVisionRange);
-
     void highlightVisionRange();
-    bool ShouldDisplayVisionRange() const;
 
 };
 
