@@ -8,12 +8,13 @@
 
 class Movement {
 private:
-    Vector2 lastLegalPosition{};
-    Vector2 currentPosition{};
+    Vector2 lastLegalPosition;
+    Vector2 currentPosition;
+    Vector2 shortestDistanceFromTarget{};
     float creatureRadius{};
     float shouldUpdatePosition{};
     float timeAfterPositionShouldBeUpdated{1.f/2.f};
-    float deltaTime{};
+    float deltaTime;
     int xDirection{1};
     int yDirection{1};
 
@@ -28,7 +29,6 @@ public:
     void move();
     void setCreatureRadius(float creatureRadius);
     void setInitialCreaturePosVector(float x, float y);
-
     bool goToTarget(const Vector2& target);
 };
 

@@ -26,19 +26,20 @@ void Creature::update(FoodContainer& foodContainer) {
 
     //TODO consider using state design pattern in future
 
+
+    int nearestFoodPosition = this->eyes.isFoodInRange(foodContainer.getFoodArray());
+
     //TODO change the name of function below is not obvious what it does
     this->eyes.setHightlightPositionVector(this->movement.getPosition());
 
 
-    int nearestFoodPosition = this->eyes.isFoodInRange(foodContainer.getFoodArray());
 
-    if(nearestFoodPosition != -1){
-        if(this->movement.goToTarget(foodContainer.getVectorAtIndex(nearestFoodPosition))){
-            foodContainer.deleteFood(nearestFoodPosition);
-        }
-
-    }else{
+    if(nearestFoodPosition == -1){
         this->movement.move();
+
+    }else if(this->movement.goToTarget(foodContainer.getVectorAtIndex(nearestFoodPosition))){
+
+        foodContainer.deleteFood(nearestFoodPosition);
     }
 
     if(eyes.ShouldDisplayVisionRange()){

@@ -53,7 +53,9 @@ void Movement::goBackToLegalPositionIfOutOfBound() {
 }
 
 bool Movement::goToTarget(const Vector2& target) {
-    //will return bull when targed is reached
+
+
+
     Vector2 direction = Vector2Normalize(Vector2Subtract(target, this->currentPosition));
 
     this->currentPosition.x += direction.x;
