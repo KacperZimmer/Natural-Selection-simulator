@@ -11,7 +11,7 @@ private:
     Vector2 hightlightPositionVector{};
     bool shouldDisplayVisionRange{false};
     float seeingRange{40.f};
-    float closestDistance{MAXFLOAT};
+    float closestDistance;
 public:
     Seeing(const Vector2& posToDrawIn){
         this->hightlightPositionVector = posToDrawIn;

@@ -9,12 +9,12 @@ int main() {
 
     Creature creature{SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 10};
 
-    Creature creature1{SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 10};
+    Creature creature1{SCREEN_WIDTH / 2, 100, 10};
 
 
 
     FoodContainer foodContainer{};
-    foodContainer.generateFood(60);
+    foodContainer.generateFood(300);
 
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT,"Selection simulator");
 
@@ -29,9 +29,9 @@ int main() {
         }
 
         creature.render();
-        creature.update(foodContainer);
 
         creature1.render();
+        creature.update(foodContainer);
         creature1.update(foodContainer);
 
         foodContainer.renderContainer();

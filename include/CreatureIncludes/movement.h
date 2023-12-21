@@ -15,6 +15,7 @@ private:
     float shouldUpdatePosition{};
     float timeAfterPositionShouldBeUpdated{1.f/2.f};
     float deltaTime;
+    int speedFactor{2};
     int xDirection{1};
     int yDirection{1};
 

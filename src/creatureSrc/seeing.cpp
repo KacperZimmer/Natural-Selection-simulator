@@ -4,7 +4,6 @@
 #include <algorithm>
 #include "raymath.h"
 
-using namespace std;
 void Seeing::highlightVisionRange() {
 
     if(this->shouldDisplayVisionRange){
@@ -35,13 +34,12 @@ int Seeing::isFoodInRange(const std::vector<std::unique_ptr<Food>>& foodVector){
         if(foodVector[i] == nullptr){
             continue;
         }
-        currentDistance = Vector2Distance(this->hightlightPositionVector, foodVector[i]->getPosition());
+        currentDistance = Vector2Distance(hightlightPositionVector, foodVector[i]->getPosition());
         if(this->closestDistance >= currentDistance){
             this->closestDistance = std::min(this->closestDistance, currentDistance);
             indexToReturn = i;
         }
     }
-
 
     return this->closestDistance <= this->seeingRange + 1.f * 2 ? indexToReturn : -1;
 }
