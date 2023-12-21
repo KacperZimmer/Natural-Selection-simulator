@@ -17,24 +17,38 @@ private:
     float radiusCreature{};
     float moveSpeed{1.f};
     float seeingRadius{20.f};
-    Movement movement{0.f};
-    Seeing eyes{{}};
+    Movement movement;
+    Seeing eyes;
     double energy{1000};
 
 public:
 
 
-    Creature(float x, float y, float radius) : radiusCreature{radius}{
-        movement.setCreatureRadius(this->radiusCreature);
-        movement.setInitialCreaturePosVector(x,y);
+    Creature(float x, float y, float radius, float speed, float seeingRange) : radiusCreature{radius}{
+
+//        this->movement = {};
+//
+//        this->eyes = {this->movement.getPosition(), this->seeingRadius};
+//        movement.setCreatureRadius(this->radiusCreature);
+//        movement.setInitialCreaturePosVector(x,y);
 
     }
+    Creature(){
 
+    }
     double getEnergy() const;
     double calcEnergyLoss() const;
     void render();
     void turnOnVision();
     void update(FoodContainer& foodContainer);
+
+    void setMovement(Movement& movement){
+        this->movement = movement;
+    }
+    void setSeeing(Seeing& eyes){
+        this->eyes = eyes;
+    }
+
 };
 
 
