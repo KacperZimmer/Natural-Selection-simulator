@@ -13,6 +13,7 @@ void Creature::render() {
 }
 
 double Creature::calcEnergyLoss() const {
+    //kinetic energy formula scaled by scale factor
     return (pow(this->radiusCreature, 3) * pow(this->moveSpeed,2) ) / 700;
 }
 
@@ -21,20 +22,28 @@ double Creature::getEnergy() const {
 }
 
 void Creature::update(FoodContainer& foodContainer) {
-    //TO DO consider using state design pattern in future
-    int nearestFoodPosition = this->eyes.isFoodInRange(foodContainer.getFoodArray());
+    this->eyes.setHightlightPositionVector(this->movement.getPosition());
 
-    if(nearestFoodPosition != -1){
+
+    //TODO consider using state design pattern in futurex
+    int nearestFoodPosition = this->eyes.isFoodInRange(foodContainer.getFoodArray());
+    //TODO change the name of function below is not obvious what it does
+
+    if(nearestFoodPosition == -1){
+        this->movement.move();
+        std::cout << "i am moving " << std::endl;
+
+    }else if(this->movement.goToTarget(foodContainer.getVectorAtIndex(nearestFoodPosition))){
+
         foodContainer.deleteFood(nearestFoodPosition);
     }
 
-    this->movement.move();
-    this->energy -= calcEnergyLoss();
     if(eyes.ShouldDisplayVisionRange()){
         eyes.highlightVisionRange();
-        this->eyes.setHightlightPositionVector(this->movement.getPosition());
 
     }
+    this->energy -= calcEnergyLoss();
+
 
 
 }

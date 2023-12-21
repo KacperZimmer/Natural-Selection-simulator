@@ -31,7 +31,6 @@ public:
     }
 
     double getEnergy() const;
-
     double calcEnergyLoss() const;
     void render();
     void turnOnVision();
@@ -39,4 +38,4 @@ public:
 };
 
 
-#endif //EXAMPLE_CREATURE_H
+#endif

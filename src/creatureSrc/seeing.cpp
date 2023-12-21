@@ -1,12 +1,13 @@
 
 #include "../../include/CreatureIncludes/seeing.h"
-
 #include <iostream>
+#include <algorithm>
 #include "raymath.h"
+
 void Seeing::highlightVisionRange() {
 
     if(this->shouldDisplayVisionRange){
-        DrawCircle(this->hightlightPositionVector.x, this->hightlightPositionVector.y, 30.f, Color{25, 102, 209,125});
+        DrawCircle(static_cast<int>(this->hightlightPositionVector.x), static_cast<int>(this->hightlightPositionVector.y), this->seeingRange, Color{25, 102, 209,125});
     }
 }
 
@@ -22,17 +23,24 @@ bool Seeing::ShouldDisplayVisionRange() const {
     return this->shouldDisplayVisionRange;
 }
 
-int Seeing::isFoodInRange(std::vector<std::unique_ptr<Food>> &foodVector) {
+int Seeing::isFoodInRange(const std::vector<std::unique_ptr<Food>>& foodVector){
 
-    for( int i = 0; i < foodVector.size(); ++i){
 
-        if(foodVector[i] && Vector2Distance(foodVector[i]->getPosition(), this->hightlightPositionVector) <= 0 + this->seeingRange + foodVector[i]->getFoodRadius() * 2){
-            return i;
+    this->closestDistance = MAXFLOAT;
 
+    float currentDistance{};
+    int indexToReturn{-1};
+    for(int i = 0; i < foodVector.size(); ++i){
+        if(foodVector[i] == nullptr){
+            continue;
         }
-
-
+        currentDistance = Vector2Distance(hightlightPositionVector, foodVector[i]->getPosition());
+        if(this->closestDistance >= currentDistance){
+            this->closestDistance = std::min(this->closestDistance, currentDistance);
+            indexToReturn = i;
+        }
     }
-    return -1;
+
+    return this->closestDistance <= this->seeingRange + 1.f * 2 ? indexToReturn : -1;
 }
 

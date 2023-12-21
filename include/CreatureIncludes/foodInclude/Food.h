@@ -19,9 +19,6 @@ public:
     Food();
     Food(float foodRadius);
     const Vector2& getPosition() const;
-    float getFoodRadius(){
-        return this->foodRadius;
-    }
     void render();
 
 };
