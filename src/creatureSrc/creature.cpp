@@ -25,7 +25,8 @@ void Creature::update(FoodContainer& foodContainer) {
     this->eyes.setHightlightPositionVector(this->movement.getPosition());
 
 
-    //TODO consider using state design pattern in futurex
+    //TODO consider using state design pattern in future
+
     int nearestFoodPosition = this->eyes.isFoodInRange(foodContainer.getFoodArray());
     //TODO change the name of function below is not obvious what it does
 

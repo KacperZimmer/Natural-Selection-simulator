@@ -24,8 +24,12 @@ private:
 
 public:
     const Vector2& getPosition() const;
-    Movement(float radius){
+    Movement(float radius, float speed){
         this->creatureRadius = radius;
+        this->speedFactor = speed;
+    }
+    Movement(){
+
     }
     void move();
     void setCreatureRadius(float creatureRadius);

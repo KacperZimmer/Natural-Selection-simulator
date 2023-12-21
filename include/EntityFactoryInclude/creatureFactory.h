@@ -10,7 +10,7 @@
 
 class CreatureFactory : public entityFactory{
 public:
-    std::unique_ptr<Creature> prepareOne() override;
+    std::unique_ptr<Creature> prepareOne(float xPos, float yPos, float size, float speed, float seeingRange) override;
 };
 
 

@@ -8,21 +8,17 @@
 #include "include/EntityFactoryInclude/creatureFactory.h"
 
 int main() {
-    // TODO clean up the mess here when finished with most of logic
 
-    Creature creature{SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 10};
-
-    Creature creature1{SCREEN_WIDTH / 2, 100, 10};
 
     std::vector<std::unique_ptr<Creature>> creatureContainer{};
 
     FoodContainer foodContainer{};
-    foodContainer.generateFood(300);
+    foodContainer.generateFood(3000);
 
     std::unique_ptr<entityFactory> entityFactorytest = std::make_unique<CreatureFactory>();
 
 
-    creatureContainer.push_back(entityFactorytest->prepareOne());
+    creatureContainer.push_back(entityFactorytest->prepareOne(SCREEN_HEIGHT / 2,SCREEN_WIDTH / 2, 10, 2,30));
 
 
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT,"Selection simulator");
@@ -31,21 +27,18 @@ int main() {
     while(!WindowShouldClose()){
         BeginDrawing();
         ClearBackground(WHITE);
-
+//
         creatureContainer[0]->render();
+
+        creatureContainer[0]->update(foodContainer);
 
 //        if(GuiButton(Rectangle{0.f, SCREEN_HEIGHT - 50,120,50},"Highlight Vision")){
 //            creature.turnOnVision();
 //            creature1.turnOnVision();
 //        }
 //
-//        creature.render();
-//
-//        creature1.render();
-//        creature.update(foodContainer);
-//        creature1.update(foodContainer);
-//
-//        foodContainer.renderContainer();
+
+        foodContainer.renderContainer();
 
         EndDrawing();
     }
