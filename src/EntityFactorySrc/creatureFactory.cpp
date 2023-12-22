@@ -12,7 +12,6 @@ std::unique_ptr<Creature> CreatureFactory::prepareOne(float xPos, float yPos, fl
     creature->setMovement(movement);
     creature->setSeeing(seeing);
 
-//    return std::make_unique<Creature>(xPos, yPos, size);
 
     return creature;
 }

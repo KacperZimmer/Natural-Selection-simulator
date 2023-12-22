@@ -1,5 +1,5 @@
 
-#include "../../include/CreatureIncludes/foodInclude/foodContainer.h"
+#include "../../include/foodInclude/foodContainer.h"
 
 void FoodContainer::generateFood(int quantity) {
     for(int i = 0; i < quantity; ++i){

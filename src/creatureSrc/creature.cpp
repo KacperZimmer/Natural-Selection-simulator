@@ -26,26 +26,25 @@ void Creature::update(FoodContainer& foodContainer) {
 
 
     //TODO consider using state design pattern in future
-
     int nearestFoodPosition = this->eyes.isFoodInRange(foodContainer.getFoodArray());
     //TODO change the name of function below is not obvious what it does
 
     if(nearestFoodPosition == -1){
         this->movement.move();
-        std::cout << "i am moving " << std::endl;
 
     }else if(this->movement.goToTarget(foodContainer.getVectorAtIndex(nearestFoodPosition))){
 
         foodContainer.deleteFood(nearestFoodPosition);
+        this->energy += 500;
     }
 
     if(eyes.ShouldDisplayVisionRange()){
         eyes.highlightVisionRange();
 
     }
+
     this->energy -= calcEnergyLoss();
-
-
+    std::cout << this->energy << std::endl;
 
 }
 

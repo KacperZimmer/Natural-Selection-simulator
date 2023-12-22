@@ -13,7 +13,7 @@ private:
     Vector2 shortestDistanceFromTarget{};
     float creatureRadius{};
     float shouldUpdatePosition{};
-    float timeAfterPositionShouldBeUpdated{1.f/2.f};
+    float timeAfterPositionShouldBeUpdated{1.f/1.4f};
     float deltaTime;
     int speedFactor{2};
     int xDirection{1};
