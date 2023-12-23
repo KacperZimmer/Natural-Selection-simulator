@@ -15,6 +15,9 @@ private:
 
 public:
     void render();
+    const float timeToUpdate{1.f};
+    float shouldUpdate{};
+    float deltatime;
     void update(FoodContainer& foodContainer);
     void generate(int quantity);
     CreatureContainer(std::unique_ptr<entityFactory>& factory){

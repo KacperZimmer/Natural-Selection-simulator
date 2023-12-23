@@ -11,11 +11,16 @@
 
 class Creature {
 private:
+    bool isAlive{true};
+    Color currentColor{BLUE};
+    Color deathColor{BLACK};
     float radiusCreature{};
     float moveSpeed;
     Movement movement;
     Seeing eyes;
     double energy{1000};
+
+    double calcEnergyLoss() const;
 
 public:
 
@@ -23,18 +28,23 @@ public:
     Creature(float x, float y, float radius, float speed, float seeingRange) : radiusCreature{radius}, moveSpeed{speed}{
     };
     Creature(){};
+
     double getEnergy() const;
-    double calcEnergyLoss() const;
     void render();
     void turnOnVision();
     void update(FoodContainer& foodContainer);
-
     void setMovement(Movement& movement){
         this->movement = movement;
     }
     void setSeeing(Seeing& eyes){
         this->eyes = eyes;
     }
+
+    bool isDead(){
+        return !this->isAlive;
+    }
+
+
 
 };
 

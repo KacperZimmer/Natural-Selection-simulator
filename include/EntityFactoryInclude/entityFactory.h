@@ -17,6 +17,7 @@ public:
         return get;
     }
 
+
     virtual ~entityFactory() {}
 };
 

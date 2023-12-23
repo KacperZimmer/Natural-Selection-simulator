@@ -11,13 +11,29 @@ void CreatureContainer::render() {
 }
 
 void CreatureContainer::update(FoodContainer& foodContainer) {
-
-    for(auto& creature : this->creatureContainer){
-        if(creature == nullptr){
+    for (size_t i = 0; i < this->creatureContainer.size(); ++i) {
+        if(this->creatureContainer[i] == nullptr){
             continue;
         }
-        creature->update(foodContainer);
+
+
+        if ( creatureContainer[i]->isDead()) {
+            deltatime = GetFrameTime();
+
+            if (this->shouldUpdate <= this->timeToUpdate) {
+                this->shouldUpdate += deltatime;
+
+            } else {
+                creatureContainer[i].reset();
+                this->shouldUpdate = 0.f;
+            }
+        }else{
+            creatureContainer[i]->update(foodContainer);
+
+        }
+
     }
+
 
 }
 
