@@ -1,5 +1,5 @@
 #include <random>
-#include "../../include/CreatureIncludes/foodInclude/Food.h"
+#include "../../include/foodInclude/Food.h"
 #include "../../include/constantValues.h"
 
 std::random_device rd;

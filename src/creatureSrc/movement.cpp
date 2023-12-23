@@ -2,6 +2,7 @@
 #include "../../include/CreatureIncludes/movement.h"
 #include "raymath.h"
 #include <random>
+#include <iostream>
 
 const Vector2& Movement::getPosition() const {
 
@@ -12,19 +13,20 @@ void Movement::move() {
 
     goBackToLegalPositionIfOutOfBound();
 
-    this->deltaTime = GetFrameTime();
+
 
     this->shouldUpdatePosition += deltaTime;
+            ;
 
     if(this->shouldUpdatePosition >= this->timeAfterPositionShouldBeUpdated){
         this->shouldUpdatePosition = 0.f;
 
         this->xDirection *= this->generateRandomDirection();
-        this->yDirection = this->generateRandomDirection();
+        this->yDirection *= this->generateRandomDirection();
 
     }else{
-        this->currentPosition.x += static_cast<float>(2 * xDirection);
-        this->currentPosition.y += static_cast<float>(2 * yDirection );
+        this->currentPosition.x += static_cast<float>(this->speedFactor * xDirection);
+        this->currentPosition.y += static_cast<float>(this-> speedFactor * yDirection );
     }
 }
 
@@ -54,12 +56,10 @@ void Movement::goBackToLegalPositionIfOutOfBound() {
 
 bool Movement::goToTarget(const Vector2& target) {
 
-
-
     Vector2 direction = Vector2Normalize(Vector2Subtract(target, this->currentPosition));
 
-    this->currentPosition.x += direction.x;
-    this->currentPosition.y += direction.y;
+    this->currentPosition.x += direction.x * this->speedFactor;
+    this->currentPosition.y += direction.y * this->speedFactor;
 
     if(Vector2Distance(this->currentPosition, target) <= this->creatureRadius){
         return true;
