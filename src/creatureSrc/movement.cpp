@@ -2,6 +2,7 @@
 #include "../../include/CreatureIncludes/movement.h"
 #include "raymath.h"
 #include <random>
+#include <iostream>
 
 const Vector2& Movement::getPosition() const {
 
@@ -12,9 +13,10 @@ void Movement::move() {
 
     goBackToLegalPositionIfOutOfBound();
 
-    this->deltaTime = GetFrameTime();
+
 
     this->shouldUpdatePosition += deltaTime;
+            ;
 
     if(this->shouldUpdatePosition >= this->timeAfterPositionShouldBeUpdated){
         this->shouldUpdatePosition = 0.f;

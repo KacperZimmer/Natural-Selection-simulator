@@ -3,7 +3,7 @@
 #define EXAMPLE_SEEING_H
 #include <raylib.h>
 #include <vector>
-#include "foodInclude/Food.h"
+#include "../foodInclude/Food.h"
 #include <memory>
 
 class Seeing {

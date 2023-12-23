@@ -5,15 +5,15 @@
 #include "../../include/constantValues.h"
 #include "raylib.h"
 #include <vector>
+#include <random>
 
 class Movement {
 private:
     Vector2 lastLegalPosition;
     Vector2 currentPosition;
-    Vector2 shortestDistanceFromTarget{};
     float creatureRadius{};
     float shouldUpdatePosition{};
-    float timeAfterPositionShouldBeUpdated{1.f/2.f};
+    float timeAfterPositionShouldBeUpdated{1.f/1.3f};
     float deltaTime;
     int speedFactor{2};
     int xDirection{1};
@@ -27,8 +27,13 @@ public:
     Movement(float radius, float speed){
         this->creatureRadius = radius;
         this->speedFactor = speed;
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_real_distribution<> dis(0.0169255, 0.05);
+        this->deltaTime = dis(gen);
     }
     Movement(){
+
 
     }
     void move();

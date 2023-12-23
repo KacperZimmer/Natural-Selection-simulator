@@ -7,9 +7,10 @@ void Creature::turnOnVision() {
     this->eyes.setShouldDisplayVisionRange(currentState);
 
 }
+
 void Creature::render() {
 
-    DrawCircle(static_cast<int>(movement.getPosition().x), static_cast<int>(movement.getPosition().y),this->radiusCreature, BLUE);
+    DrawCircle(static_cast<int>(movement.getPosition().x), static_cast<int>(movement.getPosition().y),this->radiusCreature, this->currentColor);
 }
 
 double Creature::calcEnergyLoss() const {
@@ -22,30 +23,35 @@ double Creature::getEnergy() const {
 }
 
 void Creature::update(FoodContainer& foodContainer) {
+    // TODO consider using state design pattern in future
+    if(this->energy <= 0){
+        this->isAlive = false;
+        this->currentColor = this->deathColor;
+        return;
+    }
+
+
+
     this->eyes.setHightlightPositionVector(this->movement.getPosition());
 
 
-    //TODO consider using state design pattern in future
-
     int nearestFoodPosition = this->eyes.isFoodInRange(foodContainer.getFoodArray());
-    //TODO change the name of function below is not obvious what it does
 
     if(nearestFoodPosition == -1){
         this->movement.move();
-        std::cout << "i am moving " << std::endl;
 
     }else if(this->movement.goToTarget(foodContainer.getVectorAtIndex(nearestFoodPosition))){
 
         foodContainer.deleteFood(nearestFoodPosition);
+        this->energy += 500;
     }
 
     if(eyes.ShouldDisplayVisionRange()){
         eyes.highlightVisionRange();
 
     }
+
     this->energy -= calcEnergyLoss();
-
-
 
 }
 
