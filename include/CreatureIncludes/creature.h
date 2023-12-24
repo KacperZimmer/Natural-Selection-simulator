@@ -18,10 +18,15 @@ private:
     float moveSpeed;
     Movement movement;
     Seeing eyes;
-    double energy{1000};
+    double startingEnergy{5000};
+    double energy{5000};
 
     double calcEnergyLoss() const;
-
+    void die();
+    void updateEnergy();
+    void updateMovement(size_t nearestFoodPositioninSeeingRange);
+    void updateMovement(size_t nearestFoodIndex, FoodContainer& foodContainer);
+    void updateVision();
 public:
 
 

@@ -19,7 +19,7 @@ int main() {
 
     CreatureContainer creatureContainer{entityFactorytest};
 
-    creatureContainer.generate(3000);
+    creatureContainer.generate(30);
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT,"Selection simulator");
 
     SetTargetFPS(60);
@@ -29,12 +29,12 @@ int main() {
 
         creatureContainer.render();
         creatureContainer.update(foodContainer);
-//
-//        if(GuiButton(Rectangle{0.f, SCREEN_HEIGHT - 50,120,50},"Highlight Vision")){
-//
-//            creatureContainer.updateVision();
-//
-//        }
+
+        if(GuiButton(Rectangle{0.f, SCREEN_HEIGHT - 50,120,50},"Highlight Vision")){
+
+            creatureContainer.updateVision();
+
+        }
 
         foodContainer.renderContainer();
 

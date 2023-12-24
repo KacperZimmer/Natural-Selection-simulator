@@ -2,22 +2,26 @@
 #include "../../../include/EntityFactoryInclude/creatureFactory.h"
 
 void CreatureContainer::render() {
+
     for(const auto& creature : this->creatureContainer){
         if(creature == nullptr){
             continue;
         }
+
         creature->render();
     }
 }
 
 void CreatureContainer::update(FoodContainer& foodContainer) {
+
     for (size_t i = 0; i < this->creatureContainer.size(); ++i) {
+
         if(this->creatureContainer[i] == nullptr){
             continue;
         }
 
+        if (creatureContainer[i]->isDead()) {
 
-        if ( creatureContainer[i]->isDead()) {
             deltatime = GetFrameTime();
 
             if (this->shouldUpdate <= this->timeToUpdate) {

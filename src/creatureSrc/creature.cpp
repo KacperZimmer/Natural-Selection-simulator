@@ -3,6 +3,7 @@
 
 
 void Creature::turnOnVision() {
+
     bool currentState = !this->eyes.ShouldDisplayVisionRange();
     this->eyes.setShouldDisplayVisionRange(currentState);
 
@@ -14,44 +15,72 @@ void Creature::render() {
 }
 
 double Creature::calcEnergyLoss() const {
+
     //kinetic energy formula scaled by scale factor
     return (pow(this->radiusCreature, 3) * pow(this->moveSpeed,2) ) / 700;
 }
 
 double Creature::getEnergy() const {
+
     return energy;
 }
 
 void Creature::update(FoodContainer& foodContainer) {
+
     // TODO consider using state design pattern in future
     if(this->energy <= 0){
-        this->isAlive = false;
-        this->currentColor = this->deathColor;
+        die();
         return;
     }
 
-
-
     this->eyes.setHightlightPositionVector(this->movement.getPosition());
-
-
-    int nearestFoodPosition = this->eyes.isFoodInRange(foodContainer.getFoodArray());
-
-    if(nearestFoodPosition == -1){
-        this->movement.move();
-
-    }else if(this->movement.goToTarget(foodContainer.getVectorAtIndex(nearestFoodPosition))){
-
-        foodContainer.deleteFood(nearestFoodPosition);
-        this->energy += 500;
-    }
 
     if(eyes.ShouldDisplayVisionRange()){
         eyes.highlightVisionRange();
 
     }
+    long long nearestFoodPositioninSeeingRange = this->eyes.isFoodInRange(foodContainer.getFoodArray());
 
+
+
+    switch(nearestFoodPositioninSeeingRange){
+
+        case -1:
+            this->updateMovement(nearestFoodPositioninSeeingRange);
+            break;
+
+        default:
+            this->updateMovement(nearestFoodPositioninSeeingRange, foodContainer);
+            break;
+    }
+
+
+    this->updateEnergy();
+}
+
+void Creature::die() {
+    this->isAlive = false;
+    this->currentColor = this->deathColor;
+}
+
+void Creature::updateEnergy() {
     this->energy -= calcEnergyLoss();
+}
+
+void Creature::updateMovement(size_t nearestFoodPositioninSeeingRange) {
+    if(nearestFoodPositioninSeeingRange == -1){
+        this->movement.move();
+
+    }
+
+}
+
+void Creature::updateMovement(size_t nearestFoodIndex,FoodContainer& foodContainer) {
+    if(this->movement.goToTarget(foodContainer.getVectorAtIndex(nearestFoodIndex))){
+
+        foodContainer.deleteFood(nearestFoodIndex);
+        this->energy += 500;
+    }
 
 }
 
