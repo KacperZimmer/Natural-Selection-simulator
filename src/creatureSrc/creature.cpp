@@ -32,16 +32,9 @@ void Creature::update(FoodContainer& foodContainer) {
         die();
         return;
     }
+    this->updateVision();
 
-    this->eyes.setHightlightPositionVector(this->movement.getPosition());
-
-    if(eyes.ShouldDisplayVisionRange()){
-        eyes.highlightVisionRange();
-
-    }
     long long nearestFoodPositioninSeeingRange = this->eyes.isFoodInRange(foodContainer.getFoodArray());
-
-
 
     switch(nearestFoodPositioninSeeingRange){
 
@@ -53,7 +46,6 @@ void Creature::update(FoodContainer& foodContainer) {
             this->updateMovement(nearestFoodPositioninSeeingRange, foodContainer);
             break;
     }
-
 
     this->updateEnergy();
 }
@@ -82,6 +74,16 @@ void Creature::updateMovement(size_t nearestFoodIndex,FoodContainer& foodContain
         this->energy += 500;
     }
 
+}
+
+void Creature::updateVision() {
+
+    this->eyes.setHightlightPositionVector(this->movement.getPosition());
+
+    if(eyes.ShouldDisplayVisionRange()){
+        eyes.highlightVisionRange();
+
+    }
 }
 
 
