@@ -20,7 +20,6 @@ public:
     Food(float foodRadius);
     const Vector2& getPosition() const;
     void render();
-
 };
 
 

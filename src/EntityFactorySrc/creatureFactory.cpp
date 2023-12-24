@@ -15,3 +15,4 @@ std::unique_ptr<Creature> CreatureFactory::prepareOne(float xPos, float yPos, fl
 
     return creature;
 }
+
