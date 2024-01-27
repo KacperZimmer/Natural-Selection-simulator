@@ -1,5 +1,6 @@
 #include "../../../include/CreatureIncludes/creatureContainer/CreatureContainer.h"
 #include "../../../include/EntityFactoryInclude/creatureFactory.h"
+#include <iostream>
 
 void CreatureContainer::render() {
 
@@ -54,5 +55,26 @@ void CreatureContainer::updateVision() {
         }
         creature->turnOnVision();
     }
+}
+
+void CreatureContainer::generateSymmetricaly(size_t quantity,float size) {
+
+
+    size_t numEachSide = quantity / 4;
+    float y_spacing = SCREEN_HEIGHT / quantity;
+    float x_spacing = SCREEN_WIDTH / quantity;
+
+
+
+        for(int i = 0; i < 4; ++i){
+            for(int j = 0; j < numEachSide; ++j) {
+
+                std::unique_ptr<Creature> currentCreature = std::move(factory->prepareOne(this->startingXpos, this->startingYpos, size, 2.f, 20.f));
+                creatureContainer.push_back(std::move(currentCreature));
+                this->startingYpos += y_spacing;
+            }
+        }
+
+
 }
 
