@@ -15,11 +15,15 @@ private:
 
 public:
     void render();
+    float startingXpos{20};
+    float startingYpos{20};
+
     const float timeToUpdate{1.f};
     float shouldUpdate{};
     float deltatime;
     void update(FoodContainer& foodContainer);
     void generate(int quantity);
+    void generateSymmetricaly(size_t quantity, float size);
     CreatureContainer(std::unique_ptr<entityFactory>& factory){
         this->factory = std::move(factory);
     }
