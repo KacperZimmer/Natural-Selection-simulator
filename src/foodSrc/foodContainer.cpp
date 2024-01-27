@@ -10,7 +10,6 @@ void FoodContainer::generateFood(int quantity) {
 std::vector<std::unique_ptr<Food>> &FoodContainer::getFoodArray(){
     return this->foodVector;
 }
-
 void FoodContainer::renderContainer() {
     for(const auto& food : this->foodVector){
 

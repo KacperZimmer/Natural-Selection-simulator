@@ -3,6 +3,7 @@
 #include "raymath.h"
 #include <random>
 #include <iostream>
+#include <cfloat>
 
 const Vector2& Movement::getPosition() const {
 
@@ -74,6 +75,26 @@ void Movement::setCreatureRadius(float creatureRadius) {
 void Movement::setInitialCreaturePosVector(float x, float y) {
     this->currentPosition.x = x;
     this->currentPosition.y = y;
+}
+
+void Movement::GoToClosestPathToBoundary() {
+    Vector2 closestPoint{};
+
+    float shortestPath = FLT_MAX;
+    float current_x_pos = 0, current_y_pos = 0;
+
+    for(int i = 0; i < 4; i++){
+
+        for(int j = 0; j < 100; ++j){
+            Vector2 currentPositionToCheck{current_x_pos, current_y_pos};
+            shortestPath = std::min(Vector2Distance(currentPositionToCheck, this->currentPosition),shortestPath);
+
+            if(shortestPath > Vector2Distance(currentPositionToCheck, this->currentPosition)){
+                closestPoint.x = current_x_pos;
+                closestPoint.y = current_y_pos;
+            }
+        }
+    }
 }
 
 

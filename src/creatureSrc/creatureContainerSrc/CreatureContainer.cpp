@@ -1,5 +1,4 @@
 #include "../../../include/CreatureIncludes/creatureContainer/CreatureContainer.h"
-#include "../../../include/EntityFactoryInclude/creatureFactory.h"
 #include <iostream>
 
 void CreatureContainer::render() {
@@ -38,8 +37,6 @@ void CreatureContainer::update(FoodContainer& foodContainer) {
         }
 
     }
-
-
 }
 
 void CreatureContainer::generate(int quantity) {
@@ -57,21 +54,19 @@ void CreatureContainer::updateVision() {
     }
 }
 
-void CreatureContainer::generateSymmetricaly(size_t quantity,float size) {
-    int scale = size / 10;
+void CreatureContainer::generateSymmetricaly(size_t quantity,float radius) {
+    int scale = radius / 10;
 
     size_t numEachSide = quantity / 4;
     //TODO this looks absolutely disgusting
-    float y_spacing = (SCREEN_HEIGHT / ((size) * 2 * static_cast<float> (quantity))) * static_cast<float>((75 * ((scale == 0) ? 1 : scale)));
-    float x_spacing = (SCREEN_WIDTH / ((size) * 2 *  static_cast<float> (quantity))) * static_cast<float>((75 * ((scale == 0) ? 1 : scale)));
-        std::cout << y_spacing << std::endl;
+    float y_spacing = (SCREEN_HEIGHT / ((radius) * 2 * static_cast<float> (quantity))) * static_cast<float>((75 * ((scale == 0) ? 1 : scale)));
+    float x_spacing = (SCREEN_WIDTH / ((radius) * 2 *  static_cast<float> (quantity))) * static_cast<float>((75 * ((scale == 0) ? 1 : scale)));
 
-        std::cout << numEachSide << "this is the number" << std::endl;
 
         for(int i = 0; i < 4; ++i){
             for(int j = 0; j < numEachSide; ++j) {
 
-                std::unique_ptr<Creature> currentCreature = std::move(factory->prepareOne(this->startingXpos, this->startingYpos, size, 2.f, 20.f));
+                std::unique_ptr<Creature> currentCreature = std::move(factory->prepareOne(this->startingXpos, this->startingYpos, radius, 2.f, 40.f));
                 creatureContainer.push_back(std::move(currentCreature));
 
                 switch (i){

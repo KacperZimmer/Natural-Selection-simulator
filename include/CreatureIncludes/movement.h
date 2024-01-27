@@ -34,12 +34,12 @@ public:
     }
     Movement(){
 
-
     }
     void move();
     void setCreatureRadius(float creatureRadius);
     void setInitialCreaturePosVector(float x, float y);
     bool goToTarget(const Vector2& target);
+    void GoToClosestPathToBoundary();
 };
 
 

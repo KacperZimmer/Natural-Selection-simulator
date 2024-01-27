@@ -34,18 +34,22 @@ void Creature::update(FoodContainer& foodContainer) {
     }
     this->updateVision();
 
+    if(foodConsumed == 2){
+
+    }
+
     long long nearestFoodPositioninSeeingRange = this->eyes.isFoodInRange(foodContainer.getFoodArray());
 
-//    switch(nearestFoodPositioninSeeingRange){
-//
-//        case -1:
-//            this->updateMovement(nearestFoodPositioninSeeingRange);
-//            break;
-//
-//        default:
-//            this->updateMovement(nearestFoodPositioninSeeingRange, foodContainer);
-//            break;
-//    }
+    switch(nearestFoodPositioninSeeingRange){
+
+        case -1:
+            movement.move();
+            break;
+
+        default:
+            this->updateMovement(nearestFoodPositioninSeeingRange, foodContainer);
+            break;
+    }
 
     this->updateEnergy();
 }
@@ -72,6 +76,7 @@ void Creature::updateMovement(size_t nearestFoodIndex,FoodContainer& foodContain
 
         foodContainer.deleteFood(nearestFoodIndex);
         this->energy += 500;
+        ++this->foodConsumed;
     }
 
 }
