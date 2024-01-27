@@ -16,7 +16,7 @@ private:
 public:
     void render();
     float startingXpos{20};
-    float startingYpos{100};
+    float startingYpos{20};
 
     const float timeToUpdate{1.f};
     float shouldUpdate{};
