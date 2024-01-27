@@ -1,5 +1,6 @@
 #include "../../../include/CreatureIncludes/creatureContainer/CreatureContainer.h"
 #include "../../../include/EntityFactoryInclude/creatureFactory.h"
+#include <iostream>
 
 void CreatureContainer::render() {
 
@@ -54,5 +55,50 @@ void CreatureContainer::updateVision() {
         }
         creature->turnOnVision();
     }
+}
+
+void CreatureContainer::generateSymmetricaly(size_t quantity,float size) {
+    int scale = size / 10;
+
+    size_t numEachSide = quantity / 4;
+    //TODO this looks absolutely disgusting
+    float y_spacing = (SCREEN_HEIGHT / ((size) * 2 * static_cast<float> (quantity))) * static_cast<float>((75 * ((scale == 0) ? 1 : scale)));
+    float x_spacing = (SCREEN_WIDTH / ((size) * 2 *  static_cast<float> (quantity))) * static_cast<float>((75 * ((scale == 0) ? 1 : scale)));
+        std::cout << y_spacing << std::endl;
+
+        std::cout << numEachSide << "this is the number" << std::endl;
+
+        for(int i = 0; i < 4; ++i){
+            for(int j = 0; j < numEachSide; ++j) {
+
+                std::unique_ptr<Creature> currentCreature = std::move(factory->prepareOne(this->startingXpos, this->startingYpos, size, 2.f, 20.f));
+                creatureContainer.push_back(std::move(currentCreature));
+
+                switch (i){
+                    case 0:
+                        this->startingYpos += y_spacing;
+                        break;
+
+                    case 1:
+                        this->startingXpos += x_spacing;
+                        break;
+
+                    case 2:
+                        this->startingYpos -= y_spacing;
+                        break;
+
+                    case 3:
+                        this->startingXpos -= x_spacing;
+                        break;
+
+                    default:
+                        std::cout << "wrong indexing" << std::endl;
+                }
+            }
+        }
+
+
+
+
 }
 

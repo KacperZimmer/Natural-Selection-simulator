@@ -1,7 +1,6 @@
 
 #ifndef EXAMPLE_CREATURE_H
 #define EXAMPLE_CREATURE_H
-#include <iostream>
 
 #include "movement.h"
 #include "seeing.h"

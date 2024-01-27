@@ -36,16 +36,16 @@ void Creature::update(FoodContainer& foodContainer) {
 
     long long nearestFoodPositioninSeeingRange = this->eyes.isFoodInRange(foodContainer.getFoodArray());
 
-    switch(nearestFoodPositioninSeeingRange){
-
-        case -1:
-            this->updateMovement(nearestFoodPositioninSeeingRange);
-            break;
-
-        default:
-            this->updateMovement(nearestFoodPositioninSeeingRange, foodContainer);
-            break;
-    }
+//    switch(nearestFoodPositioninSeeingRange){
+//
+//        case -1:
+//            this->updateMovement(nearestFoodPositioninSeeingRange);
+//            break;
+//
+//        default:
+//            this->updateMovement(nearestFoodPositioninSeeingRange, foodContainer);
+//            break;
+//    }
 
     this->updateEnergy();
 }
