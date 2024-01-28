@@ -30,6 +30,7 @@ double Creature::getEnergy() const {
 
 void Creature::update(FoodContainer& foodContainer) {
 
+
     // TODO consider using state design pattern in future
     if(this->energy <= 0){
         die();
@@ -37,32 +38,29 @@ void Creature::update(FoodContainer& foodContainer) {
     }
     this->updateVision();
 
-    if(foodConsumed == 1){
 
-        if(movement.goToTarget(movement.goToClosestPathToBoundary(1000))){
-            foodConsumed = 0;
+    if(foodConsumed == 3){
 
+        if(!movement.goToTarget(movement.goToClosestPathToBoundary(1000))){
             return;
         }
 
 
-    }else{
+    }else {
 
+        long long nearestFoodPositioninSeeingRange = this->eyes.isFoodInRange(foodContainer.getFoodArray());
 
-    long long nearestFoodPositioninSeeingRange = this->eyes.isFoodInRange(foodContainer.getFoodArray());
+        switch (nearestFoodPositioninSeeingRange) {
 
-    switch(nearestFoodPositioninSeeingRange){
+            case -1:
+                movement.move();
+                break;
 
-        case -1:
-            movement.move();
-            break;
-
-        default:
-            this->updateMovement(nearestFoodPositioninSeeingRange, foodContainer);
-            break;
+            default:
+                this->updateMovement(nearestFoodPositioninSeeingRange, foodContainer);
+                break;
+        }
     }
-    }
-
 
     this->updateEnergy();
 }

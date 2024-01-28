@@ -91,19 +91,20 @@ Vector2 Movement::goToClosestPathToBoundary(size_t searchDepth) const{
 
     Vector2 closestPoint{};
 
-    float shortestPath = FLT_MAX;
-    static float current_x_pos = 0, current_y_pos = 0;
 
-    float y_spacing = SCREEN_HEIGHT / searchDepth;
-    float x_spacing = SCREEN_WIDTH / searchDepth;
+    float shortestPath = FLT_MAX;
+    float current_x_pos = 20, current_y_pos = 20;
+
+    float y_spacing = 1;
+    float x_spacing = 1;
 
     for(int i = 0; i < 4; i++){
 
-        for(size_t j = 0; j < searchDepth; ++j){
+        for(size_t j = 0; j < 700; ++j){
 
             Vector2 currentPositionToCheck{current_x_pos, current_y_pos};
 
-            float distanceToTheGivenPoint = Vector2Distance(this->currentPosition,currentPositionToCheck );
+            float distanceToTheGivenPoint = Vector2Distance(this->currentPosition,currentPositionToCheck);
 
             if(shortestPath > distanceToTheGivenPoint){
                 closestPoint.x = current_x_pos;
@@ -138,6 +139,7 @@ Vector2 Movement::goToClosestPathToBoundary(size_t searchDepth) const{
         }
 
     }
+    std::cout << closestPoint.x << std::endl ;
     return closestPoint;
 
 }
