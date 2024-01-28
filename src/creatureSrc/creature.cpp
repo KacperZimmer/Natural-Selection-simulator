@@ -3,6 +3,9 @@
 
 
 void Creature::turnOnVision() {
+    /*
+     * Turns on the vision range for each character
+     */
 
     bool currentState = !this->eyes.ShouldDisplayVisionRange();
     this->eyes.setShouldDisplayVisionRange(currentState);
@@ -16,7 +19,7 @@ void Creature::render() {
 
 double Creature::calcEnergyLoss() const {
 
-    //kinetic energy formula scaled by scale factor
+    //kinetic energy formula scaled by 700 factor
     return (pow(this->radiusCreature, 3) * pow(this->moveSpeed,2) ) / 700;
 }
 
@@ -34,9 +37,17 @@ void Creature::update(FoodContainer& foodContainer) {
     }
     this->updateVision();
 
-    if(foodConsumed == 2){
+    if(foodConsumed == 1){
 
-    }
+        if(movement.goToTarget(movement.goToClosestPathToBoundary(1000))){
+            foodConsumed = 0;
+
+            return;
+        }
+
+
+    }else{
+
 
     long long nearestFoodPositioninSeeingRange = this->eyes.isFoodInRange(foodContainer.getFoodArray());
 
@@ -50,6 +61,8 @@ void Creature::update(FoodContainer& foodContainer) {
             this->updateMovement(nearestFoodPositioninSeeingRange, foodContainer);
             break;
     }
+    }
+
 
     this->updateEnergy();
 }

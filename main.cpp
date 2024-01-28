@@ -9,7 +9,7 @@
 #include "include/CreatureIncludes/creatureContainer/CreatureContainer.h"
 
 int main() {
-
+    //TODO write more comments for explaining what functions do in classes !!
 
 
     FoodContainer foodContainer{};
@@ -19,7 +19,7 @@ int main() {
 
     CreatureContainer creatureContainer{entityFactorytest};
 
-    creatureContainer.generateSymmetricaly(100,10.f);
+    creatureContainer.generateSymmetricaly(4,10.f);
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT,"Selection simulator");
 
     SetTargetFPS(60);

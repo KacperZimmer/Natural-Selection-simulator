@@ -12,12 +12,13 @@ const Vector2& Movement::getPosition() const {
 
 void Movement::move() {
 
+    /*
+     * Updates player position after some time
+     */
+
     goBackToLegalPositionIfOutOfBound();
 
-
-
     this->shouldUpdatePosition += deltaTime;
-            ;
 
     if(this->shouldUpdatePosition >= this->timeAfterPositionShouldBeUpdated){
         this->shouldUpdatePosition = 0.f;
@@ -56,7 +57,7 @@ void Movement::goBackToLegalPositionIfOutOfBound() {
 }
 
 bool Movement::goToTarget(const Vector2& target) {
-
+    //TODO violates single resp, function takes player to the target and checks if return whether or not he reached the target
     Vector2 direction = Vector2Normalize(Vector2Subtract(target, this->currentPosition));
 
     this->currentPosition.x += direction.x * this->speedFactor;
@@ -69,6 +70,9 @@ bool Movement::goToTarget(const Vector2& target) {
 }
 
 void Movement::setCreatureRadius(float creatureRadius) {
+    /*  sets initial radius of character
+     * which is crucial for later movement calculations
+     * */
    this->creatureRadius = creatureRadius;
 }
 
@@ -77,24 +81,65 @@ void Movement::setInitialCreaturePosVector(float x, float y) {
     this->currentPosition.y = y;
 }
 
-void Movement::GoToClosestPathToBoundary() {
+Vector2 Movement::goToClosestPathToBoundary(size_t searchDepth) const{
+    /*
+     *TODO
+     * doesnt work correctly,
+     * should take player do the closest box boundary
+     * after he ate x amount of food
+     */
+
     Vector2 closestPoint{};
 
     float shortestPath = FLT_MAX;
-    float current_x_pos = 0, current_y_pos = 0;
+    static float current_x_pos = 0, current_y_pos = 0;
+
+    float y_spacing = SCREEN_HEIGHT / searchDepth;
+    float x_spacing = SCREEN_WIDTH / searchDepth;
 
     for(int i = 0; i < 4; i++){
 
-        for(int j = 0; j < 100; ++j){
-            Vector2 currentPositionToCheck{current_x_pos, current_y_pos};
-            shortestPath = std::min(Vector2Distance(currentPositionToCheck, this->currentPosition),shortestPath);
+        for(size_t j = 0; j < searchDepth; ++j){
 
-            if(shortestPath > Vector2Distance(currentPositionToCheck, this->currentPosition)){
+            Vector2 currentPositionToCheck{current_x_pos, current_y_pos};
+
+            float distanceToTheGivenPoint = Vector2Distance(this->currentPosition,currentPositionToCheck );
+
+            if(shortestPath > distanceToTheGivenPoint){
                 closestPoint.x = current_x_pos;
                 closestPoint.y = current_y_pos;
+                shortestPath = distanceToTheGivenPoint;
             }
+
+
+            switch (i){
+                case 0:
+                    current_x_pos += x_spacing;
+                    break;
+
+                case 1:
+                    current_y_pos += y_spacing;
+                    break;
+
+                case 2:
+                    current_x_pos -= x_spacing;
+                    break;
+
+                case 3:
+                    current_y_pos -= y_spacing;
+                    break;
+
+                default:
+                    break;
+            }
+
+
+
         }
+
     }
+    return closestPoint;
+
 }
 
 
