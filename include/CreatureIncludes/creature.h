@@ -20,11 +20,12 @@ private:
     Seeing eyes;
     double startingEnergy{5000};
     double energy{5000};
+    bool reproductionStatus{false};
+
 
     double calcEnergyLoss() const;
     void die();
     void updateEnergy();
-    void updateMovement(size_t nearestFoodPositioninSeeingRange);
     void updateMovement(size_t nearestFoodIndex, FoodContainer& foodContainer);
     void updateVision();
 public:
@@ -41,6 +42,7 @@ public:
     void setMovement(Movement& movement);
     void setSeeing(Seeing& eyes);
     bool isDead() const;
+    bool shouldReproduce();
 
 
 

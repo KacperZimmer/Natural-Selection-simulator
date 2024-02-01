@@ -9,8 +9,9 @@
 #include "include/CreatureIncludes/creatureContainer/CreatureContainer.h"
 
 int main() {
-    //TODO write more comments for explaining what functions do in classes !!
 
+    //TODO write more comments for explaining what functions do in classes !!
+    //TODO put code below into some class or function
 
     FoodContainer foodContainer{};
     foodContainer.generateFood(20);
@@ -24,6 +25,7 @@ int main() {
 
     SetTargetFPS(60);
     while(!WindowShouldClose()){
+
         BeginDrawing();
         ClearBackground(WHITE);
 
