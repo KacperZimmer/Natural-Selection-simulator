@@ -44,3 +44,13 @@ int Seeing::isFoodInRange(const std::vector<std::unique_ptr<Food>>& foodVector){
     return this->closestDistance <= this->seeingRange + 1.f * 2 ? indexToReturn : -1;
 }
 
+Seeing::Seeing() {
+    this->seeingRange = 0.f;
+
+}
+
+Seeing::Seeing(const Vector2 &posToDrawIn, float seeingRange) {
+    this->hightlightPositionVector = posToDrawIn;
+    this->seeingRange = seeingRange;
+}
+

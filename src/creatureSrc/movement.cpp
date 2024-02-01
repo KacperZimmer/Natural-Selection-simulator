@@ -81,7 +81,7 @@ void Movement::setInitialCreaturePosVector(float x, float y) {
     this->currentPosition.y = y;
 }
 
-Vector2 Movement::goToClosestPathToBoundary(size_t searchDepth) const{
+Vector2 Movement::getClosestPathToBoundaryVector() const{
 
 
     Vector2 closestPoint{};
@@ -93,9 +93,9 @@ Vector2 Movement::goToClosestPathToBoundary(size_t searchDepth) const{
     float y_spacing = 1;
     float x_spacing = 1;
 
-    for(int i = 0; i < 4; i++){
+    for(short i = 0; i < 4; i++){
 
-        for(size_t j = 0; j < SCREEN_WIDTH - this->creatureRadius * 2; ++j){
+        for(int j = 0; j < SCREEN_WIDTH - this->creatureRadius * 2; ++j){
 
             Vector2 currentPositionToCheck{current_x_pos, current_y_pos};
 
@@ -136,6 +136,19 @@ Vector2 Movement::goToClosestPathToBoundary(size_t searchDepth) const{
     }
     std::cout << closestPoint.x << std::endl ;
     return closestPoint;
+
+}
+
+Movement::Movement(float radius, float speed) {
+    this->creatureRadius = radius;
+    this->speedFactor = speed;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> dis(0.0169255, 0.05);
+    this->deltaTime = dis(gen);
+}
+
+Movement::Movement() {
 
 }
 

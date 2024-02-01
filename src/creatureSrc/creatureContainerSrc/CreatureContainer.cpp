@@ -97,3 +97,8 @@ void CreatureContainer::generateSymmetricaly(size_t quantity,float radius) {
 
 }
 
+CreatureContainer::CreatureContainer(std::unique_ptr<entityFactory> &factory) {
+    this->factory = std::move(factory);
+
+}
+

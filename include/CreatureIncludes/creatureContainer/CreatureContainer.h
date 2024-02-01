@@ -24,9 +24,7 @@ public:
     void update(FoodContainer& foodContainer);
     void generate(int quantity);
     void generateSymmetricaly(size_t quantity, float radius);
-    CreatureContainer(std::unique_ptr<entityFactory>& factory){
-        this->factory = std::move(factory);
-    }
+    CreatureContainer(std::unique_ptr<entityFactory>& factory);
     void updateVision();
 
 };
