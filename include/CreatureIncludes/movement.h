@@ -24,25 +24,16 @@ private:
 
 public:
     const Vector2& getPosition() const;
-    Movement(float radius, float speed){
-
-        this->creatureRadius = radius;
-        this->speedFactor = speed;
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        std::uniform_real_distribution<> dis(0.0169255, 0.05);
-        this->deltaTime = dis(gen);
+    Movement(float radius, float speed);
 
 
-    }
-    Movement(){
 
-    }
+    Movement();
     void move();
     void setCreatureRadius(float creatureRadius);
     void setInitialCreaturePosVector(float x, float y);
     bool goToTarget(const Vector2& target);
-    Vector2 goToClosestPathToBoundary(size_t searchDepth) const;
+    Vector2 getClosestPathToBoundaryVector() const;
 
 
 };

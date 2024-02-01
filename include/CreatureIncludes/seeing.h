@@ -13,16 +13,12 @@ private:
     float seeingRange;
     float closestDistance;
 public:
-    Seeing(const Vector2& posToDrawIn, float seeingRange){
-        this->hightlightPositionVector = posToDrawIn;
-        this->seeingRange = seeingRange;
-    }
-    Seeing(){
-        this->seeingRange = 0.f;
-    }
+
+    Seeing(const Vector2& posToDrawIn, float seeingRange);
+    Seeing();
+
     int isFoodInRange(const std::vector<std::unique_ptr<Food>>& foodVector);
     bool ShouldDisplayVisionRange() const;
-
     void setHightlightPositionVector(const Vector2 &hightlightPositionVector);
     void setShouldDisplayVisionRange(bool shouldDisplayVisionRange);
     void highlightVisionRange();

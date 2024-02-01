@@ -1,7 +1,7 @@
 #include <iostream>
 #include "include/CreatureIncludes/creature.h"
 #define RAYGUI_IMPLEMENTATION
-#include "include/raygui.h"
+#include "include/gui_lib/raygui.h"
 #include "include/foodInclude/Food.h"
 #include "include/foodInclude/foodContainer.h"
 #include "include/EntityFactoryInclude/entityFactory.h"
@@ -13,13 +13,13 @@ int main() {
 
 
     FoodContainer foodContainer{};
-    foodContainer.generateFood(200);
+    foodContainer.generateFood(20);
 
     std::unique_ptr<entityFactory> entityFactorytest = std::make_unique<CreatureFactory>();
 
     CreatureContainer creatureContainer{entityFactorytest};
 
-    creatureContainer.generateSymmetricaly(30,10.f);
+    creatureContainer.generateSymmetricaly(5,10.f);
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT,"Selection simulator");
 
     SetTargetFPS(60);

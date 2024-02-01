@@ -30,24 +30,18 @@ private:
 public:
 
 
-    Creature(float x, float y, float radius, float speed, float seeingRange) : radiusCreature{radius}, moveSpeed{speed}{
-    };
+    Creature(float x, float y, float radius, float speed, float seeingRange) : radiusCreature{radius}, moveSpeed{speed}
+    {};
     Creature(){};
 
     double getEnergy() const;
     void render();
     void turnOnVision();
     void update(FoodContainer& foodContainer);
-    void setMovement(Movement& movement){
-        this->movement = movement;
-    }
-    void setSeeing(Seeing& eyes){
-        this->eyes = eyes;
-    }
+    void setMovement(Movement& movement);
+    void setSeeing(Seeing& eyes);
+    bool isDead() const;
 
-    bool isDead() const{
-        return !this->isAlive;
-    }
 
 
 

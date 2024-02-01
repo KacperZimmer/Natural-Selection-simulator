@@ -30,37 +30,22 @@ double Creature::getEnergy() const {
 
 void Creature::update(FoodContainer& foodContainer) {
 
-
-    // TODO consider using state design pattern in future
     if(this->energy <= 0){
         die();
         return;
     }
     this->updateVision();
 
+    size_t nearestFoodInVectorIndex = this->eyes.isFoodInRange(foodContainer.getFoodArray());
 
-    if(foodConsumed == 3){
-
-        if(!movement.goToTarget(movement.goToClosestPathToBoundary(1000))){
-            return;
-        }
-
-
-    }else {
-
-        long long nearestFoodPositioninSeeingRange = this->eyes.isFoodInRange(foodContainer.getFoodArray());
-
-        switch (nearestFoodPositioninSeeingRange) {
-
-            case -1:
-                movement.move();
-                break;
-
-            default:
-                this->updateMovement(nearestFoodPositioninSeeingRange, foodContainer);
-                break;
-        }
+    if(nearestFoodInVectorIndex != -1){
+        this->updateMovement(nearestFoodInVectorIndex,foodContainer);
+    }else if(this->foodConsumed >= 1){
+        movement.goToTarget(movement.getClosestPathToBoundaryVector());
+    }else{
+        this->movement.move();
     }
+
 
     this->updateEnergy();
 }
@@ -100,6 +85,19 @@ void Creature::updateVision() {
         eyes.highlightVisionRange();
 
     }
+}
+
+void Creature::setMovement(Movement &movement) {
+    this->movement = movement;
+
+}
+
+void Creature::setSeeing(Seeing &eyes) {
+    this->eyes = eyes;
+}
+
+bool Creature::isDead() const {
+    return !this->isAlive;
 }
 
 
