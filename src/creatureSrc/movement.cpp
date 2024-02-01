@@ -56,17 +56,19 @@ void Movement::goBackToLegalPositionIfOutOfBound() {
     }
 }
 
-bool Movement::goToTarget(const Vector2& target) {
-    //TODO violates single resp, function takes player to the target and checks if return whether or not he reached the target
-    Vector2 direction = Vector2Normalize(Vector2Subtract(target, this->currentPosition));
+void Movement::goToTarget(const Vector2& target) {
 
-    this->currentPosition.x += direction.x * this->speedFactor;
-    this->currentPosition.y += direction.y * this->speedFactor;
 
-    if(Vector2Distance(this->currentPosition, target) <= this->creatureRadius){
-        return true;
+    if(!checkIfTargetIsReached(target)) {
+        //TODO violates single resp, function takes player to the target and checks if return whether or not he reached the target
+        Vector2 direction = Vector2Normalize(Vector2Subtract(target, this->currentPosition));
+
+
+        this->currentPosition.x += direction.x * this->speedFactor;
+        this->currentPosition.y += direction.y * this->speedFactor;
     }
-    return false;
+
+
 }
 
 void Movement::setCreatureRadius(float creatureRadius) {
@@ -150,6 +152,13 @@ Movement::Movement(float radius, float speed) {
 
 Movement::Movement() {
 
+}
+
+bool Movement::checkIfTargetIsReached(Vector2 target) {
+    if(Vector2Distance(this->currentPosition, target) <= this->creatureRadius){
+        return true;
+    }
+    return false;
 }
 
 

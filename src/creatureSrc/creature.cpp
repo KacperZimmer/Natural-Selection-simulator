@@ -59,20 +59,28 @@ void Creature::updateEnergy() {
     this->energy -= calcEnergyLoss();
 }
 
-void Creature::updateMovement(size_t nearestFoodPositioninSeeingRange) {
-    if(nearestFoodPositioninSeeingRange == -1){
-        this->movement.move();
+void Creature::updateMovement(size_t nearestFoodIndex,FoodContainer& foodContainer) {
 
+    Vector2 currentPathEndPoint = foodContainer.getVectorAtIndex(nearestFoodIndex);
+
+
+    if(!this->movement.checkIfTargetIsReached(currentPathEndPoint)){
+        movement.goToTarget(currentPathEndPoint);
+    }else{
+        this->energy += 500;
+        foodContainer.deleteFood(nearestFoodIndex);
+        ++this->foodConsumed;
     }
 
-}
+//    if(this->movement.goToTarget(foodContainer.getVectorAtIndex(nearestFoodIndex))){
+//
+//        foodContainer.deleteFood(nearestFoodIndex);
+//        this->energy += 500;
+//        ++this->foodConsumed;
+//    }
 
-void Creature::updateMovement(size_t nearestFoodIndex,FoodContainer& foodContainer) {
-    if(this->movement.goToTarget(foodContainer.getVectorAtIndex(nearestFoodIndex))){
-
-        foodContainer.deleteFood(nearestFoodIndex);
-        this->energy += 500;
-        ++this->foodConsumed;
+    if(foodConsumed == 2){
+        this->reproductionStatus = true;
     }
 
 }
@@ -98,6 +106,10 @@ void Creature::setSeeing(Seeing &eyes) {
 
 bool Creature::isDead() const {
     return !this->isAlive;
+}
+
+bool Creature::shouldReproduce() {
+    return this->shouldReproduce();
 }
 
 

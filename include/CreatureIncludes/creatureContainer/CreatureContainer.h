@@ -20,7 +20,7 @@ public:
 
     const float timeToUpdate{1.f};
     float shouldUpdate{};
-    float deltatime;
+    float deltatime{};
     void update(FoodContainer& foodContainer);
     void generate(int quantity);
     void generateSymmetricaly(size_t quantity, float radius);

@@ -32,8 +32,9 @@ public:
     void move();
     void setCreatureRadius(float creatureRadius);
     void setInitialCreaturePosVector(float x, float y);
-    bool goToTarget(const Vector2& target);
+    void goToTarget(const Vector2& target);
     Vector2 getClosestPathToBoundaryVector() const;
+    bool checkIfTargetIsReached(Vector2 target);
 
 
 };
