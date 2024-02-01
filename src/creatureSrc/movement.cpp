@@ -82,25 +82,20 @@ void Movement::setInitialCreaturePosVector(float x, float y) {
 }
 
 Vector2 Movement::goToClosestPathToBoundary(size_t searchDepth) const{
-    /*
-     *TODO
-     * doesnt work correctly,
-     * should take player do the closest box boundary
-     * after he ate x amount of food
-     */
+
 
     Vector2 closestPoint{};
 
 
     float shortestPath = FLT_MAX;
-    float current_x_pos = 20, current_y_pos = 20;
+    float current_x_pos = this->creatureRadius, current_y_pos = this->creatureRadius;
 
     float y_spacing = 1;
     float x_spacing = 1;
 
     for(int i = 0; i < 4; i++){
 
-        for(size_t j = 0; j < 700; ++j){
+        for(size_t j = 0; j < SCREEN_WIDTH - this->creatureRadius * 2; ++j){
 
             Vector2 currentPositionToCheck{current_x_pos, current_y_pos};
 
