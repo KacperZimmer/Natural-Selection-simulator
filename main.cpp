@@ -9,17 +9,17 @@
 #include "include/CreatureIncludes/creatureContainer/CreatureContainer.h"
 
 int main() {
-
+    //TODO write more comments for explaining what functions do in classes !!
 
 
     FoodContainer foodContainer{};
-    foodContainer.generateFood(70);
+    foodContainer.generateFood(200);
 
     std::unique_ptr<entityFactory> entityFactorytest = std::make_unique<CreatureFactory>();
 
     CreatureContainer creatureContainer{entityFactorytest};
 
-    creatureContainer.generateSymmetricaly(20,10.f);
+    creatureContainer.generateSymmetricaly(30,10.f);
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT,"Selection simulator");
 
     SetTargetFPS(60);

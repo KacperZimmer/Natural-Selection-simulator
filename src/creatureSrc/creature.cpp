@@ -3,6 +3,9 @@
 
 
 void Creature::turnOnVision() {
+    /*
+     * Turns on the vision range for each character
+     */
 
     bool currentState = !this->eyes.ShouldDisplayVisionRange();
     this->eyes.setShouldDisplayVisionRange(currentState);
@@ -16,7 +19,7 @@ void Creature::render() {
 
 double Creature::calcEnergyLoss() const {
 
-    //kinetic energy formula scaled by scale factor
+    //kinetic energy formula scaled by 700 factor
     return (pow(this->radiusCreature, 3) * pow(this->moveSpeed,2) ) / 700;
 }
 
@@ -27,6 +30,7 @@ double Creature::getEnergy() const {
 
 void Creature::update(FoodContainer& foodContainer) {
 
+
     // TODO consider using state design pattern in future
     if(this->energy <= 0){
         die();
@@ -34,18 +38,29 @@ void Creature::update(FoodContainer& foodContainer) {
     }
     this->updateVision();
 
-    long long nearestFoodPositioninSeeingRange = this->eyes.isFoodInRange(foodContainer.getFoodArray());
 
-//    switch(nearestFoodPositioninSeeingRange){
-//
-//        case -1:
-//            this->updateMovement(nearestFoodPositioninSeeingRange);
-//            break;
-//
-//        default:
-//            this->updateMovement(nearestFoodPositioninSeeingRange, foodContainer);
-//            break;
-//    }
+    if(foodConsumed == 3){
+
+        if(!movement.goToTarget(movement.goToClosestPathToBoundary(1000))){
+            return;
+        }
+
+
+    }else {
+
+        long long nearestFoodPositioninSeeingRange = this->eyes.isFoodInRange(foodContainer.getFoodArray());
+
+        switch (nearestFoodPositioninSeeingRange) {
+
+            case -1:
+                movement.move();
+                break;
+
+            default:
+                this->updateMovement(nearestFoodPositioninSeeingRange, foodContainer);
+                break;
+        }
+    }
 
     this->updateEnergy();
 }
@@ -72,6 +87,7 @@ void Creature::updateMovement(size_t nearestFoodIndex,FoodContainer& foodContain
 
         foodContainer.deleteFood(nearestFoodIndex);
         this->energy += 500;
+        ++this->foodConsumed;
     }
 
 }

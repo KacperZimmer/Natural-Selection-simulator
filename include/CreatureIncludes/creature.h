@@ -11,6 +11,7 @@
 class Creature {
 private:
     bool isAlive{true};
+    size_t foodConsumed{};
     Color currentColor{BLUE};
     Color deathColor{BLACK};
     float radiusCreature{};
@@ -44,7 +45,7 @@ public:
         this->eyes = eyes;
     }
 
-    bool isDead(){
+    bool isDead() const{
         return !this->isAlive;
     }
 
