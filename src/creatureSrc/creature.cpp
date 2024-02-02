@@ -2,7 +2,11 @@
 #include <cmath>
 
 
+
 void Creature::turnOnVision() {
+    /*
+     * Turns on the vision range for each character
+     */
 
     bool currentState = !this->eyes.ShouldDisplayVisionRange();
     this->eyes.setShouldDisplayVisionRange(currentState);
@@ -16,63 +20,77 @@ void Creature::render() {
 
 double Creature::calcEnergyLoss() const {
 
-    //kinetic energy formula scaled by scale factor
+    //kinetic energy formula scaled by 700 factor
     return (pow(this->radiusCreature, 3) * pow(this->moveSpeed,2) ) / 700;
 }
 
-double Creature::getEnergy() const {
 
-    return energy;
-}
 
-void Creature::update(FoodContainer& foodContainer) {
+void Creature::headToSleep(Vector2 target) {
 
-    // TODO consider using state design pattern in future
-    if(this->energy <= 0){
-        die();
-        return;
+    if(!this->movement.checkIfTargetIsReached(target)) {
+        movement.goToTarget(movement.getClosestPathToBoundaryVector());
+        this->updateEnergy();
+
+    }else{
+        this->sleeping = true;
     }
-    this->updateVision();
-
-    long long nearestFoodPositioninSeeingRange = this->eyes.isFoodInRange(foodContainer.getFoodArray());
-
-//    switch(nearestFoodPositioninSeeingRange){
-//
-//        case -1:
-//            this->updateMovement(nearestFoodPositioninSeeingRange);
-//            break;
-//
-//        default:
-//            this->updateMovement(nearestFoodPositioninSeeingRange, foodContainer);
-//            break;
-//    }
-
-    this->updateEnergy();
 }
+
 
 void Creature::die() {
     this->isAlive = false;
     this->currentColor = this->deathColor;
 }
 
+
+
+void Creature::update(FoodContainer& foodContainer) {
+
+    if(this->energy <= 0){
+        die();
+        return;
+    }
+    this->updateVision();
+
+    size_t nearestFoodInVectorIndex = this->eyes.isFoodInRange(foodContainer.getFoodArray());
+
+    if(nearestFoodInVectorIndex != -1){
+        this->updateMovement(nearestFoodInVectorIndex,foodContainer);
+
+    }else if(this->sleeping == true){
+        this->reproductionStatus =true;
+
+    }else if(this->foodConsumed >= 1){
+        this->headToSleep(movement.getClosestPathToBoundaryVector());
+
+    }else{
+        this->movement.move();
+        this->updateEnergy();
+
+    }
+
+
+}
+
 void Creature::updateEnergy() {
     this->energy -= calcEnergyLoss();
 }
 
-void Creature::updateMovement(size_t nearestFoodPositioninSeeingRange) {
-    if(nearestFoodPositioninSeeingRange == -1){
-        this->movement.move();
-
-    }
-
-}
-
 void Creature::updateMovement(size_t nearestFoodIndex,FoodContainer& foodContainer) {
-    if(this->movement.goToTarget(foodContainer.getVectorAtIndex(nearestFoodIndex))){
 
-        foodContainer.deleteFood(nearestFoodIndex);
+    Vector2 currentPathEndPoint = foodContainer.getVectorAtIndex(nearestFoodIndex);
+
+
+    if(!this->movement.checkIfTargetIsReached(currentPathEndPoint)){
+        movement.goToTarget(currentPathEndPoint);
+    }else{
         this->energy += 500;
+        foodContainer.deleteFood(nearestFoodIndex);
+        ++this->foodConsumed;
     }
+
+    this->updateEnergy();
 
 }
 
@@ -85,6 +103,59 @@ void Creature::updateVision() {
 
     }
 }
+
+
+
+void Creature::setMovement(Movement &movement) {
+    this->movement = movement;
+
+}
+
+void Creature::setSeeing(Seeing &eyes) {
+    this->eyes = eyes;
+}
+
+bool Creature::isDead() const {
+    return !this->isAlive;
+}
+
+bool Creature::shouldReproduce() const {
+    return this->reproductionStatus;
+}
+
+
+
+const Vector2& Creature::getPosition() const{
+
+    return this->movement.getPosition();
+}
+
+float Creature::getRadius() const{
+    return this->radiusCreature;
+}
+
+float Creature::getSpeed() const {
+    return this->moveSpeed;
+}
+
+float Creature::seeingRange() const{
+    return this->eyes.getSeeingRange();
+}
+
+
+
+bool Creature::isSleeping() const {
+    return this->sleeping;
+}
+
+void Creature::wakeUp() {
+    this->foodConsumed = 0;
+    this->sleeping = false;
+}
+
+
+
+
 
 
 

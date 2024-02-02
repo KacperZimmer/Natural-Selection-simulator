@@ -28,12 +28,14 @@ int Seeing::isFoodInRange(const std::vector<std::unique_ptr<Food>>& foodVector){
 
     this->closestDistance = MAXFLOAT;
 
-    float currentDistance{};
+    float currentDistance;
     int indexToReturn{-1};
     for(int i = 0; i < foodVector.size(); ++i){
+
         if(foodVector[i] == nullptr){
             continue;
         }
+
         currentDistance = Vector2Distance(hightlightPositionVector, foodVector[i]->getPosition());
         if(this->closestDistance >= currentDistance){
             this->closestDistance = std::min(this->closestDistance, currentDistance);
@@ -42,5 +44,19 @@ int Seeing::isFoodInRange(const std::vector<std::unique_ptr<Food>>& foodVector){
     }
 
     return this->closestDistance <= this->seeingRange + 1.f * 2 ? indexToReturn : -1;
+}
+
+Seeing::Seeing() {
+    this->seeingRange = 0.f;
+
+}
+
+Seeing::Seeing(const Vector2 &posToDrawIn, float seeingRange) {
+    this->hightlightPositionVector = posToDrawIn;
+    this->seeingRange = seeingRange;
+}
+
+float Seeing::getSeeingRange() const {
+    return this->seeingRange;
 }
 

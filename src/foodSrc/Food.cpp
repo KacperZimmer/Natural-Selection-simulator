@@ -6,7 +6,6 @@ std::random_device rd;
 std::mt19937 gen(rd());
 
 Food::Food(float foodRadius) {
-
     this->foodRadius = foodRadius;
     this->position.x = this->generateXrandomCoord();
     this->position.y = this->generateYrandomCoord();
@@ -34,6 +33,7 @@ float Food::generateXrandomCoord() {
 }
 
 float Food::generateYrandomCoord() {
+
     std::uniform_real_distribution<float> dis(0.0f, static_cast<float>(SCREEN_WIDTH));
 
     return dis(gen);

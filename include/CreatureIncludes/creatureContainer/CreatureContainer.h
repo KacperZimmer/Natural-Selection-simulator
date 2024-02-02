@@ -9,9 +9,13 @@
 
 class CreatureContainer {
 private:
+
+    //TODO this should a list
     std::vector<std::unique_ptr<Creature>> creatureContainer{};
     std::unique_ptr<entityFactory> factory;
-
+    void cleanUpTheCreature(size_t index);
+    void generateNewCreature(size_t index);
+    size_t size{};
 
 public:
     void render();
@@ -20,13 +24,12 @@ public:
 
     const float timeToUpdate{1.f};
     float shouldUpdate{};
-    float deltatime;
-    void update(FoodContainer& foodContainer);
+    float deltatime{};
     void generate(int quantity);
-    void generateSymmetricaly(size_t quantity, float size);
-    CreatureContainer(std::unique_ptr<entityFactory>& factory){
-        this->factory = std::move(factory);
-    }
+
+    void update(FoodContainer& foodContainer);
+    void generateSymmetricaly(size_t quantity, float radius);
+    explicit CreatureContainer(std::unique_ptr<entityFactory>& factory);
     void updateVision();
 
 };

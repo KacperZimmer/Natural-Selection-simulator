@@ -1,7 +1,7 @@
 #include <iostream>
 #include "include/CreatureIncludes/creature.h"
 #define RAYGUI_IMPLEMENTATION
-#include "include/raygui.h"
+#include "include/gui_lib/raygui.h"
 #include "include/foodInclude/Food.h"
 #include "include/foodInclude/foodContainer.h"
 #include "include/EntityFactoryInclude/entityFactory.h"
@@ -10,20 +10,22 @@
 
 int main() {
 
-
+    //TODO write more comments for explaining what functions do in classes !!
+    //TODO put code below into some class or function
 
     FoodContainer foodContainer{};
-    foodContainer.generateFood(70);
+    foodContainer.generateFood(100);
 
     std::unique_ptr<entityFactory> entityFactorytest = std::make_unique<CreatureFactory>();
 
     CreatureContainer creatureContainer{entityFactorytest};
 
-    creatureContainer.generateSymmetricaly(20,10.f);
+    creatureContainer.generateSymmetricaly(32,10.f);
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT,"Selection simulator");
 
     SetTargetFPS(60);
     while(!WindowShouldClose()){
+
         BeginDrawing();
         ClearBackground(WHITE);
 
