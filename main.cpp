@@ -14,13 +14,13 @@ int main() {
     //TODO put code below into some class or function
 
     FoodContainer foodContainer{};
-    foodContainer.generateFood(20);
+    foodContainer.generateFood(100);
 
     std::unique_ptr<entityFactory> entityFactorytest = std::make_unique<CreatureFactory>();
 
     CreatureContainer creatureContainer{entityFactorytest};
 
-    creatureContainer.generateSymmetricaly(5,10.f);
+    creatureContainer.generateSymmetricaly(32,10.f);
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT,"Selection simulator");
 
     SetTargetFPS(60);

@@ -2,6 +2,7 @@
 #include <cmath>
 
 
+
 void Creature::turnOnVision() {
     /*
      * Turns on the vision range for each character
@@ -23,10 +24,26 @@ double Creature::calcEnergyLoss() const {
     return (pow(this->radiusCreature, 3) * pow(this->moveSpeed,2) ) / 700;
 }
 
-double Creature::getEnergy() const {
 
-    return energy;
+
+void Creature::headToSleep(Vector2 target) {
+
+    if(!this->movement.checkIfTargetIsReached(target)) {
+        movement.goToTarget(movement.getClosestPathToBoundaryVector());
+        this->updateEnergy();
+
+    }else{
+        this->sleeping = true;
+    }
 }
+
+
+void Creature::die() {
+    this->isAlive = false;
+    this->currentColor = this->deathColor;
+}
+
+
 
 void Creature::update(FoodContainer& foodContainer) {
 
@@ -40,19 +57,20 @@ void Creature::update(FoodContainer& foodContainer) {
 
     if(nearestFoodInVectorIndex != -1){
         this->updateMovement(nearestFoodInVectorIndex,foodContainer);
+
+    }else if(this->sleeping == true){
+        this->reproductionStatus =true;
+
     }else if(this->foodConsumed >= 1){
-        movement.goToTarget(movement.getClosestPathToBoundaryVector());
+        this->headToSleep(movement.getClosestPathToBoundaryVector());
+
     }else{
         this->movement.move();
+        this->updateEnergy();
+
     }
 
 
-    this->updateEnergy();
-}
-
-void Creature::die() {
-    this->isAlive = false;
-    this->currentColor = this->deathColor;
 }
 
 void Creature::updateEnergy() {
@@ -72,16 +90,7 @@ void Creature::updateMovement(size_t nearestFoodIndex,FoodContainer& foodContain
         ++this->foodConsumed;
     }
 
-//    if(this->movement.goToTarget(foodContainer.getVectorAtIndex(nearestFoodIndex))){
-//
-//        foodContainer.deleteFood(nearestFoodIndex);
-//        this->energy += 500;
-//        ++this->foodConsumed;
-//    }
-
-    if(foodConsumed == 2){
-        this->reproductionStatus = true;
-    }
+    this->updateEnergy();
 
 }
 
@@ -94,6 +103,8 @@ void Creature::updateVision() {
 
     }
 }
+
+
 
 void Creature::setMovement(Movement &movement) {
     this->movement = movement;
@@ -108,9 +119,43 @@ bool Creature::isDead() const {
     return !this->isAlive;
 }
 
-bool Creature::shouldReproduce() {
-    return this->shouldReproduce();
+bool Creature::shouldReproduce() const {
+    return this->reproductionStatus;
 }
+
+
+
+const Vector2& Creature::getPosition() const{
+
+    return this->movement.getPosition();
+}
+
+float Creature::getRadius() const{
+    return this->radiusCreature;
+}
+
+float Creature::getSpeed() const {
+    return this->moveSpeed;
+}
+
+float Creature::seeingRange() const{
+    return this->eyes.getSeeingRange();
+}
+
+
+
+bool Creature::isSleeping() const {
+    return this->sleeping;
+}
+
+void Creature::wakeUp() {
+    this->foodConsumed = 0;
+    this->sleeping = false;
+}
+
+
+
+
 
 
 
