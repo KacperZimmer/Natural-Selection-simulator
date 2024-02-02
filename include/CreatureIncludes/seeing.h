@@ -22,6 +22,7 @@ public:
     void setHightlightPositionVector(const Vector2 &hightlightPositionVector);
     void setShouldDisplayVisionRange(bool shouldDisplayVisionRange);
     void highlightVisionRange();
+    float getSeeingRange() const;
 
 };
 

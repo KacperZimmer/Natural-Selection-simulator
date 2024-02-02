@@ -60,7 +60,7 @@ void Movement::goToTarget(const Vector2& target) {
 
 
     if(!checkIfTargetIsReached(target)) {
-        //TODO violates single resp, function takes player to the target and checks if return whether or not he reached the target
+        //TODO violates single resp, function takes player to the target and checks if return whether he reached the target
         Vector2 direction = Vector2Normalize(Vector2Subtract(target, this->currentPosition));
 
 
@@ -73,7 +73,7 @@ void Movement::goToTarget(const Vector2& target) {
 
 void Movement::setCreatureRadius(float creatureRadius) {
     /*  sets initial radius of character
-     * which is crucial for later movement calculations
+     *  which is crucial for later movement calculations
      * */
    this->creatureRadius = creatureRadius;
 }
@@ -130,15 +130,9 @@ Vector2 Movement::getClosestPathToBoundaryVector() const{
                 default:
                     break;
             }
-
-
-
         }
-
     }
-    std::cout << closestPoint.x << std::endl ;
     return closestPoint;
-
 }
 
 Movement::Movement(float radius, float speed) {
