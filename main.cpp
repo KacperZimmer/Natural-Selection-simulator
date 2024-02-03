@@ -32,9 +32,14 @@ int main() {
         creatureContainer.render();
         creatureContainer.update(foodContainer);
 
-        if(GuiButton(Rectangle{0.f, SCREEN_HEIGHT - 50,120,50},"Highlight Vision")){
+        if(GuiButton(Rectangle{0.f, SCREEN_HEIGHT - 50,120,50},"turn on vision")){
 
-            creatureContainer.updateVision();
+            creatureContainer.turnOnVision();
+
+        }
+        if(GuiButton(Rectangle{120, SCREEN_HEIGHT - 50,120,50},"turn off the vision")){
+
+            creatureContainer.turnOffVision();
 
         }
 

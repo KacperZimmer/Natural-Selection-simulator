@@ -8,9 +8,20 @@ void Creature::turnOnVision() {
      * Turns on the vision range for each character
      */
 
-    bool currentState = !this->eyes.ShouldDisplayVisionRange();
-    this->eyes.setShouldDisplayVisionRange(currentState);
+    bool currentState = this->eyes.ShouldDisplayVisionRange();
 
+    if(currentState == false){
+        this->eyes.setShouldDisplayVisionRange(!currentState);
+    }
+
+}
+
+void Creature::turnOffVision() {
+    bool currentState = this->eyes.ShouldDisplayVisionRange();
+
+    if(currentState == true){
+        this->eyes.setShouldDisplayVisionRange(!currentState);
+    }
 }
 
 void Creature::render() {
@@ -152,6 +163,8 @@ void Creature::wakeUp() {
     this->foodConsumed = 0;
     this->sleeping = false;
 }
+
+
 
 
 

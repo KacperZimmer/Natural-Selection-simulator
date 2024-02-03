@@ -79,7 +79,7 @@ void CreatureContainer::generate(int quantity) {
     }
 }
 
-void CreatureContainer::updateVision() {
+void CreatureContainer::turnOnVision() {
 
     for(auto& creature : this->creatureContainer){
         if(creature == nullptr){
@@ -88,12 +88,20 @@ void CreatureContainer::updateVision() {
         creature->turnOnVision();
     }
 }
+void CreatureContainer::turnOffVision() {
+    for(auto& creature : this->creatureContainer){
+        if(creature == nullptr){
+            continue;
+        }
+        creature->turnOffVision();
+    }
+}
 
 void CreatureContainer::generateSymmetricaly(size_t quantity,float radius) {
     this->size = quantity;
     int scale = (radius / 10);
 
-    size_t numEachSide = quantity / 4;
+        size_t numEachSide = quantity / 4;
     //TODO this looks absolutely disgusting
     float spacing = (SCREEN_HEIGHT / ((radius) * 2 * static_cast<float> (quantity))) * static_cast<float>((75 * ((scale == 0) ? 1 : scale)));
 
@@ -177,4 +185,6 @@ void CreatureContainer::cleanUpTheCreature(size_t index) {
     }
 
 }
+
+
 

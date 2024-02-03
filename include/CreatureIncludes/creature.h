@@ -51,7 +51,7 @@ public:
     void turnOnVision();
     void update(FoodContainer& foodContainer);
     void wakeUp();
-
+    void turnOffVision();
 
 
     // setters

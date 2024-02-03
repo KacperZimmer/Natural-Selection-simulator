@@ -30,7 +30,8 @@ public:
     void update(FoodContainer& foodContainer);
     void generateSymmetricaly(size_t quantity, float radius);
     explicit CreatureContainer(std::unique_ptr<entityFactory>& factory);
-    void updateVision();
+    void turnOnVision();
+    void turnOffVision();
 
 };
 
