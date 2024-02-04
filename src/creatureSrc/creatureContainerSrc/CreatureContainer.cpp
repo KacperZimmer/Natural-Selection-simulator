@@ -35,7 +35,6 @@ void CreatureContainer::update(FoodContainer& foodContainer) {
 
 
     }
-    std::cout << this->size << std::endl;
     if(countSleeping == size){
 
         for(size_t i = 0; i < this->creatureContainer.size(); ++i){

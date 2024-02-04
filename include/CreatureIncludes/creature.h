@@ -13,7 +13,7 @@ private:
     //TODO make code less
     // tightly coupled by using interfaces in near future
 
-    Movement movement;
+    std::unique_ptr<Movable> movement;
     Seeing eyes;
 
     Color currentColor{BLUE};

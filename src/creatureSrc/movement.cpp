@@ -43,18 +43,6 @@ int Movement::generateRandomDirection() const{
 
 
 
-void Movement::goBackToLegalPositionIfOutOfBound() {
-
-    auto isNotInBounds = [this](){
-        return this->currentPosition.x >= SCREEN_WIDTH - this->creatureRadius || this->currentPosition.x <= 0 + this->creatureRadius || this->currentPosition.y >= SCREEN_HEIGHT - this->creatureRadius||this->currentPosition.y <= 0 + this->creatureRadius;
-    };
-
-    if(!isNotInBounds()){
-        this->lastLegalPosition = currentPosition;
-    }else{
-        this->currentPosition = lastLegalPosition;
-    }
-}
 
 void Movement::goToTarget(const Vector2& target) {
 
@@ -71,12 +59,7 @@ void Movement::goToTarget(const Vector2& target) {
 
 }
 
-void Movement::setCreatureRadius(float creatureRadius) {
-    /*  sets initial radius of character
-     *  which is crucial for later movement calculations
-     * */
-   this->creatureRadius = creatureRadius;
-}
+
 
 void Movement::setInitialCreaturePosVector(float x, float y) {
     this->currentPosition.x = x;

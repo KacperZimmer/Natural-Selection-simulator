@@ -4,22 +4,16 @@
 #include "../constantValues.h"
 #include "../../include/constantValues.h"
 #include "raylib.h"
+#include "Movable.h"
 #include <vector>
 #include <random>
 
-class Movement {
+class Movement : public Movable{
 private:
-    Vector2 lastLegalPosition;
-    Vector2 currentPosition;
-    float creatureRadius{};
-    float shouldUpdatePosition{};
-    float timeAfterPositionShouldBeUpdated{1.f/1.3f};
-    float deltaTime;
-    int speedFactor{2};
+
     int xDirection{1};
     int yDirection{1};
-
-    void goBackToLegalPositionIfOutOfBound();
+    int speedFactor{2};
     int generateRandomDirection() const;
 
 public:
@@ -29,12 +23,12 @@ public:
 
 
     Movement();
-    void move();
-    void setCreatureRadius(float creatureRadius);
+    void move() override;
+    void goToTarget(const Vector2& target) override;
+    bool checkIfTargetIsReached(Vector2 target) override;
+
     void setInitialCreaturePosVector(float x, float y);
-    void goToTarget(const Vector2& target);
     Vector2 getClosestPathToBoundaryVector() const;
-    bool checkIfTargetIsReached(Vector2 target);
 
 
 };
