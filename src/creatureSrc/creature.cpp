@@ -26,7 +26,7 @@ void Creature::turnOffVision() {
 
 void Creature::render() {
 
-    DrawCircle(static_cast<int>(movement.getPosition().x), static_cast<int>(movement.getPosition().y),this->radiusCreature, this->currentColor);
+    DrawCircle(static_cast<int>(movement->getPosition().x), static_cast<int>(movement->getPosition().y),this->radiusCreature, this->currentColor);
 }
 
 double Creature::calcEnergyLoss() const {
@@ -39,8 +39,8 @@ double Creature::calcEnergyLoss() const {
 
 void Creature::headToSleep(Vector2 target) {
 
-    if(!this->movement.checkIfTargetIsReached(target)) {
-        movement.goToTarget(movement.getClosestPathToBoundaryVector());
+    if(!this->movement->checkIfTargetIsReached(target)) {
+        movement->goToTarget(movement->getClosestPathToBoundaryVector());
         this->updateEnergy();
 
     }else{
@@ -73,10 +73,10 @@ void Creature::update(FoodContainer& foodContainer) {
         this->reproductionStatus =true;
 
     }else if(this->foodConsumed >= 1){
-        this->headToSleep(movement.getClosestPathToBoundaryVector());
+        this->headToSleep(movement->getClosestPathToBoundaryVector());
 
     }else{
-        this->movement.move();
+        this->movement->move();
         this->updateEnergy();
 
     }
@@ -93,8 +93,8 @@ void Creature::updateMovement(size_t nearestFoodIndex,FoodContainer& foodContain
     Vector2 currentPathEndPoint = foodContainer.getVectorAtIndex(nearestFoodIndex);
 
 
-    if(!this->movement.checkIfTargetIsReached(currentPathEndPoint)){
-        movement.goToTarget(currentPathEndPoint);
+    if(!this->movement->checkIfTargetIsReached(currentPathEndPoint)){
+        movement->goToTarget(currentPathEndPoint);
     }else{
         this->energy += 500;
         foodContainer.deleteFood(nearestFoodIndex);
@@ -107,7 +107,7 @@ void Creature::updateMovement(size_t nearestFoodIndex,FoodContainer& foodContain
 
 void Creature::updateVision() {
 
-    this->eyes.setHightlightPositionVector(this->movement.getPosition());
+    this->eyes.setHightlightPositionVector(this->movement->getPosition());
 
     if(eyes.ShouldDisplayVisionRange()){
         eyes.highlightVisionRange();
@@ -117,8 +117,8 @@ void Creature::updateVision() {
 
 
 
-void Creature::setMovement(Movement &movement) {
-    this->movement = movement;
+void Creature::setMovement(std::unique_ptr<Movable>& movement) {
+    this->movement = std::move(movement);
 
 }
 
@@ -138,7 +138,7 @@ bool Creature::shouldReproduce() const {
 
 const Vector2& Creature::getPosition() const{
 
-    return this->movement.getPosition();
+    return this->movement->getPosition();
 }
 
 float Creature::getRadius() const{

@@ -5,24 +5,28 @@
 
 #include <raylib.h>
 
+
 class Movable {
 
 protected:
     Vector2 lastLegalPosition{};
     Vector2 currentPosition{};
-    float deltaTime{};
-    float shouldUpdatePosition{};
-    float timeAfterPositionShouldBeUpdated{1.f/1.3f};
     float creatureRadius{};
+    float speed{};
 
     void goBackToLegalPositionIfOutOfBound();
 
+public://constructors
+    Movable(float creatureRadius, float speed);
 
-public:
-
+public: // methods
+    const Vector2& getPosition() const;
+    Vector2 getClosestPathToBoundaryVector() const;
     virtual void move() = 0;
     virtual void goToTarget(const Vector2& target) = 0;
     virtual bool checkIfTargetIsReached(Vector2 target) = 0;
+    void setInitialCreaturePosVector(float x, float y);
+
     virtual ~Movable();
 };
 

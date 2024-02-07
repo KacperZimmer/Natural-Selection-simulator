@@ -55,7 +55,7 @@ public:
 
 
     // setters
-    void setMovement(Movement& movement);
+    void setMovement(std::unique_ptr<Movable>& movement);
     void setSeeing(Seeing& eyes);
     //getters
     bool shouldReproduce() const;
