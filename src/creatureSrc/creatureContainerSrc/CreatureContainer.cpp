@@ -36,6 +36,7 @@ void CreatureContainer::update(FoodContainer& foodContainer) {
 
     }
     if(countSleeping == size){
+        //if all creatures are sleeping check if they can reproduce
 
         for(size_t i = 0; i < this->creatureContainer.size(); ++i){
 

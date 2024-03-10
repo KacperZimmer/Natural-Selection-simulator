@@ -37,6 +37,7 @@ private:
     void updateMovement(size_t nearestFoodIndex, FoodContainer& foodContainer);
     void updateVision();
     void headToSleep(Vector2 target);
+    bool checkIfShouldReproduce();
     void sleep();
 
 public:

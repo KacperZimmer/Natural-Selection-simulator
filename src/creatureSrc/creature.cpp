@@ -72,9 +72,11 @@ void Creature::update(FoodContainer& foodContainer) {
         this->updateMovement(nearestFoodInVectorIndex,foodContainer);
 
     }else if(this->sleeping == true){
-        this->reproductionStatus =true;
 
-    }else if(this->foodConsumed >= 1){
+        this->reproductionStatus = this->checkIfShouldReproduce();
+
+    }else if(this->foodConsumed >= 2 || this->foodConsumed == 1 && this->startingEnergy / 2 >= this->energy){
+
         this->headToSleep(movement->getClosestPathToBoundaryVector());
 
     }else{
@@ -159,6 +161,11 @@ bool Creature::isSleeping() const {
 void Creature::wakeUp() {
     this->foodConsumed = 0;
     this->sleeping = false;
+}
+
+bool Creature::checkIfShouldReproduce() {
+    if(this->foodConsumed >= 2) return true;
+    return false;
 }
 
 
