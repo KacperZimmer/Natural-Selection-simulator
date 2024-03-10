@@ -17,6 +17,8 @@ void Creature::turnOnVision() {
 }
 
 void Creature::turnOffVision() {
+    //TODO both turn off and turn on can be made into one function
+
     bool currentState = this->eyes.ShouldDisplayVisionRange();
 
     if(currentState == true){
@@ -81,7 +83,6 @@ void Creature::update(FoodContainer& foodContainer) {
 
     }
 
-
 }
 
 void Creature::updateEnergy() {
@@ -111,10 +112,9 @@ void Creature::updateVision() {
 
     if(eyes.ShouldDisplayVisionRange()){
         eyes.highlightVisionRange();
-
     }
-}
 
+}
 
 
 void Creature::setMovement(std::unique_ptr<Movable>& movement) {
@@ -137,7 +137,6 @@ bool Creature::shouldReproduce() const {
 
 
 const Vector2& Creature::getPosition() const{
-
     return this->movement->getPosition();
 }
 
@@ -152,8 +151,6 @@ float Creature::getSpeed() const {
 float Creature::seeingRange() const{
     return this->eyes.getSeeingRange();
 }
-
-
 
 bool Creature::isSleeping() const {
     return this->sleeping;

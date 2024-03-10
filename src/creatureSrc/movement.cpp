@@ -3,8 +3,6 @@
 #include "raymath.h"
 #include <random>
 #include <iostream>
-#include <cfloat>
-
 
 
 void Movement::move() {
@@ -24,8 +22,8 @@ void Movement::move() {
         this->yDirection *= this->generateRandomDirection();
 
     }else{
-        this->currentPosition.x += static_cast<float>(this->speed * xDirection);
-        this->currentPosition.y += static_cast<float>(this-> speed * yDirection );
+        this->currentPosition.x += static_cast<float>(this->speed * static_cast<float>(xDirection));
+        this->currentPosition.y += static_cast<float>(this-> speed * static_cast<float>(yDirection));
     }
 }
 

@@ -10,7 +10,7 @@
 class CreatureContainer {
 private:
 
-    //TODO this should a list
+    //TODO this should be a list
     std::vector<std::unique_ptr<Creature>> creatureContainer{};
     std::unique_ptr<entityFactory> factory;
     void cleanUpTheCreature(size_t index);

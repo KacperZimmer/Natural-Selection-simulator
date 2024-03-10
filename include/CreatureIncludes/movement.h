@@ -19,11 +19,8 @@ private:
 
 
 public:
+
     Movement(float creatureRadius, float speed);
-    Movement(bool logic);
-
-
-
     void move() override;
     void goToTarget(const Vector2& target) override;
     bool checkIfTargetIsReached(Vector2 target) override;

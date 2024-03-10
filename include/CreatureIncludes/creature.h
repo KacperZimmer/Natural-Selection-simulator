@@ -11,7 +11,7 @@
 class Creature {
 private:
     //TODO make code less
-    // tightly coupled by using interfaces in near future
+    //TODO tightly coupled
 
     std::unique_ptr<Movable> movement;
     Seeing eyes;

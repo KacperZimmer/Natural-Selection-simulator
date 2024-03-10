@@ -16,7 +16,6 @@ protected:
 
     void goBackToLegalPositionIfOutOfBound();
 
-public://constructors
     Movable(float creatureRadius, float speed);
 
 public: // methods
@@ -31,4 +30,4 @@ public: // methods
 };
 
 
-#endif //EXAMPLE_MOVABLE_H
+#endif
