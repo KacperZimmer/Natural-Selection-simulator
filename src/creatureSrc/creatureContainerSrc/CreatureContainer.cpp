@@ -60,13 +60,6 @@ void CreatureContainer::update(FoodContainer& foodContainer) {
         }
 
 
-//        for(size_t i = 0; i < this->creatureContainer.size(); ++i){
-//
-//            if(this->creatureContainer[i] == nullptr){
-//                continue;
-//            }
-//
-//        }
 
 
     }
@@ -102,8 +95,9 @@ void CreatureContainer::generateSymmetricaly(size_t quantity,float radius) {
     int scale = (radius / 10);
 
         size_t numEachSide = quantity / 4;
-    //TODO this looks absolutely disgusting
-    float spacing = (SCREEN_HEIGHT / ((radius) * 2 * static_cast<float> (quantity))) * static_cast<float>((75 * ((scale == 0) ? 1 : scale)));
+    //TODO looks absolutely disgusting
+    float spacing = (SCREEN_HEIGHT / ((radius) * 2 * static_cast<float> (quantity))) *
+            static_cast<float>((75 * ((scale == 0) ? 1 : scale)));
 
 
         for(int i = 0; i < 4; ++i){

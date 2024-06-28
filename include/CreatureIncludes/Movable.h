@@ -19,6 +19,7 @@ protected:
     Movable(float creatureRadius, float speed);
 
 public: // methods
+
     const Vector2& getPosition() const;
     Vector2 getClosestPathToBoundaryVector() const;
     virtual void move() = 0;

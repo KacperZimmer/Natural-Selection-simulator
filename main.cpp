@@ -20,7 +20,7 @@ int main() {
 
     CreatureContainer creatureContainer{entityFactorytest};
 
-    creatureContainer.generateSymmetricaly(32,10.f);
+    creatureContainer.generateSymmetricaly(1000,10.f);
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT,"Selection simulator");
 
     SetTargetFPS(60);
