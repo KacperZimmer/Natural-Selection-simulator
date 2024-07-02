@@ -9,8 +9,8 @@ class Food {
 private:
     Vector2 position{};
     float foodRadius{1.f};
-    float xPos{};
-    float yPos{};
+
+
 
     float generateXrandomCoord();
     float generateYrandomCoord();

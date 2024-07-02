@@ -4,6 +4,7 @@
 
 #include "movement.h"
 #include "seeing.h"
+#include "../CreatureIncludes/Genome.h"
 
 #include "../foodInclude/foodContainer.h"
 
@@ -16,17 +17,13 @@ private:
     std::unique_ptr<Movable> movement;
     Seeing eyes;
 
+    Genome genome;
     Color currentColor{BLUE};
     Color deathColor{BLACK};
 
     size_t foodConsumed{};
 
-    float radiusCreature{};
-    float moveSpeed;
-
     double startingEnergy{5000};
-    double energy{5000};
-
     bool reproductionStatus{false};
     bool isAlive{true};
     bool sleeping{false};
@@ -37,15 +34,17 @@ private:
     void updateMovement(size_t nearestFoodIndex, FoodContainer& foodContainer);
     void updateVision();
     void headToSleep(Vector2 target);
-    bool checkIfShouldReproduce();
+    bool checkIfShouldReproduce() const;
     void sleep();
 
 public:
 
     //constructors
-    Creature(float x, float y, float radius, float speed, float seeingRange) : radiusCreature{radius}, moveSpeed{speed}
-    {};
+    Creature(Vector2 coord ,float radius, float speed, float seeingRange) : genome{speed,seeingRange,5000,radius}
+    {
+    };
     Creature(){};
+
 
     //public methods
     void render();

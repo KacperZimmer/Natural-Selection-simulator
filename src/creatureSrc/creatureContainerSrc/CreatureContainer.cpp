@@ -142,7 +142,7 @@ CreatureContainer::CreatureContainer(std::unique_ptr<entityFactory> &factory) {
 }
 
 void CreatureContainer::generateNewCreature(size_t index) {
-
+        //TODO GIVE BIRTH FUNCTION
     if(index >= this->creatureContainer.size()){
         throw std::out_of_range("index out of the array");
     }
