@@ -10,7 +10,7 @@
 class CreatureContainer {
 private:
 
-    //TODO this should a list
+    //TODO this should be a list
     std::vector<std::unique_ptr<Creature>> creatureContainer{};
     std::unique_ptr<entityFactory> factory;
     void cleanUpTheCreature(size_t index);
@@ -30,7 +30,8 @@ public:
     void update(FoodContainer& foodContainer);
     void generateSymmetricaly(size_t quantity, float radius);
     explicit CreatureContainer(std::unique_ptr<entityFactory>& factory);
-    void updateVision();
+    void turnOnVision();
+    void turnOffVision();
 
 };
 

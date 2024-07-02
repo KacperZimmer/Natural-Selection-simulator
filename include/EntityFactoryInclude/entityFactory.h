@@ -6,6 +6,7 @@
 class entityFactory {
 public:
     virtual std::unique_ptr<Creature> prepareOne(float xPos, float yPos, float size, float speed, float seeingRange) = 0;
+    virtual std::unique_ptr<Creature> generateAccordingToGenome() = 0;
 
     float creatureRadius{};
     float seeingRange{};

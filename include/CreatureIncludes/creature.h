@@ -11,9 +11,9 @@
 class Creature {
 private:
     //TODO make code less
-    // tightly coupled by using interfaces in near future
+    //TODO tightly coupled
 
-    Movement movement;
+    std::unique_ptr<Movable> movement;
     Seeing eyes;
 
     Color currentColor{BLUE};
@@ -37,6 +37,7 @@ private:
     void updateMovement(size_t nearestFoodIndex, FoodContainer& foodContainer);
     void updateVision();
     void headToSleep(Vector2 target);
+    bool checkIfShouldReproduce();
     void sleep();
 
 public:
@@ -51,11 +52,11 @@ public:
     void turnOnVision();
     void update(FoodContainer& foodContainer);
     void wakeUp();
-
+    void turnOffVision();
 
 
     // setters
-    void setMovement(Movement& movement);
+    void setMovement(std::unique_ptr<Movable>& movement);
     void setSeeing(Seeing& eyes);
     //getters
     bool shouldReproduce() const;
