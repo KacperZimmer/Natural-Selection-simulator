@@ -1,12 +1,8 @@
 #define RAYGUI_IMPLEMENTATION
 
 #include "../../include/SimulationInclude/Simulation.h"
-#include <iostream>
 #include "../../include/CreatureIncludes/creature.h"
-
 #include "../../include/gui_lib/raygui.h"
-#include "../../include/foodInclude/Food.h"
-#include "../../include/foodInclude/foodContainer.h"
 #include "../../include/EntityFactoryInclude/entityFactory.h"
 #include "../../include/EntityFactoryInclude/creatureFactory.h"
 #include "../../include/CreatureIncludes/creatureContainer/CreatureContainer.h"
