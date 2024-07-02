@@ -8,28 +8,36 @@ void Creature::turnOnVision() {
      * Turns on the vision range for each character
      */
 
-    bool currentState = !this->eyes.ShouldDisplayVisionRange();
-    this->eyes.setShouldDisplayVisionRange(currentState);
+    bool currentState = this->eyes.ShouldDisplayVisionRange();
+
+    this->eyes.setShouldDisplayVisionRange(!currentState);
+
+}
+
+void Creature::turnOffVision() {
+    //TODO both turn off and turn on can be made into one function
+
+    bool currentState = this->eyes.ShouldDisplayVisionRange();
 
 }
 
 void Creature::render() {
 
-    DrawCircle(static_cast<int>(movement.getPosition().x), static_cast<int>(movement.getPosition().y),this->radiusCreature, this->currentColor);
+    DrawCircle(static_cast<int>(movement->getPosition().x), static_cast<int>(movement->getPosition().y),this->getRadius(), this->currentColor);
 }
 
 double Creature::calcEnergyLoss() const {
 
     //kinetic energy formula scaled by 700 factor
-    return (pow(this->radiusCreature, 3) * pow(this->moveSpeed,2) ) / 700;
+    return (pow(this->genome.getSize(), 3) * pow(this->getSpeed(),2) ) / 700;
 }
 
 
 
 void Creature::headToSleep(Vector2 target) {
 
-    if(!this->movement.checkIfTargetIsReached(target)) {
-        movement.goToTarget(movement.getClosestPathToBoundaryVector());
+    if(!this->movement->checkIfTargetIsReached(target)) {
+        movement->goToTarget(movement->getClosestPathToBoundaryVector());
         this->updateEnergy();
 
     }else{
@@ -47,7 +55,7 @@ void Creature::die() {
 
 void Creature::update(FoodContainer& foodContainer) {
 
-    if(this->energy <= 0){
+    if(this->genome.getEnergy() <= 0){
         die();
         return;
     }
@@ -59,22 +67,26 @@ void Creature::update(FoodContainer& foodContainer) {
         this->updateMovement(nearestFoodInVectorIndex,foodContainer);
 
     }else if(this->sleeping == true){
-        this->reproductionStatus =true;
 
-    }else if(this->foodConsumed >= 1){
-        this->headToSleep(movement.getClosestPathToBoundaryVector());
+        this->reproductionStatus = this->checkIfShouldReproduce();
+
+    }else if(this->foodConsumed >= 2 || this->foodConsumed == 1 && this->startingEnergy / 2 >= this->getEnergy()){
+
+        this->headToSleep(movement->getClosestPathToBoundaryVector());
 
     }else{
-        this->movement.move();
+        this->movement->move();
         this->updateEnergy();
 
     }
 
-
 }
 
 void Creature::updateEnergy() {
-    this->energy -= calcEnergyLoss();
+
+    float temp = this->genome.getEnergy();
+    temp -= calcEnergyLoss();
+    this->genome.setEnergy(temp);
 }
 
 void Creature::updateMovement(size_t nearestFoodIndex,FoodContainer& foodContainer) {
@@ -82,10 +94,12 @@ void Creature::updateMovement(size_t nearestFoodIndex,FoodContainer& foodContain
     Vector2 currentPathEndPoint = foodContainer.getVectorAtIndex(nearestFoodIndex);
 
 
-    if(!this->movement.checkIfTargetIsReached(currentPathEndPoint)){
-        movement.goToTarget(currentPathEndPoint);
+    if(!this->movement->checkIfTargetIsReached(currentPathEndPoint)){
+        movement->goToTarget(currentPathEndPoint);
     }else{
-        this->energy += 500;
+        float temp = this->genome.getEnergy();
+        temp += 500;
+        this->genome.setEnergy(temp);
         foodContainer.deleteFood(nearestFoodIndex);
         ++this->foodConsumed;
     }
@@ -96,18 +110,17 @@ void Creature::updateMovement(size_t nearestFoodIndex,FoodContainer& foodContain
 
 void Creature::updateVision() {
 
-    this->eyes.setHightlightPositionVector(this->movement.getPosition());
+    this->eyes.setHightlightPositionVector(this->movement->getPosition());
 
     if(eyes.ShouldDisplayVisionRange()){
         eyes.highlightVisionRange();
-
     }
+
 }
 
 
-
-void Creature::setMovement(Movement &movement) {
-    this->movement = movement;
+void Creature::setMovement(std::unique_ptr<Movable>& movement) {
+    this->movement = std::move(movement);
 
 }
 
@@ -126,23 +139,20 @@ bool Creature::shouldReproduce() const {
 
 
 const Vector2& Creature::getPosition() const{
-
-    return this->movement.getPosition();
+    return this->movement->getPosition();
 }
 
 float Creature::getRadius() const{
-    return this->radiusCreature;
+    return this->genome.getSize();
 }
 
 float Creature::getSpeed() const {
-    return this->moveSpeed;
+    return this->genome.getVelocity();
 }
 
 float Creature::seeingRange() const{
     return this->eyes.getSeeingRange();
 }
-
-
 
 bool Creature::isSleeping() const {
     return this->sleeping;
@@ -152,6 +162,17 @@ void Creature::wakeUp() {
     this->foodConsumed = 0;
     this->sleeping = false;
 }
+
+bool Creature::checkIfShouldReproduce() const {
+    if(this->foodConsumed >= 2) return true;
+    return false;
+}
+
+double Creature::getEnergy() const {
+    return this->genome.getEnergy();
+}
+
+
 
 
 

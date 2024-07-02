@@ -35,8 +35,8 @@ void CreatureContainer::update(FoodContainer& foodContainer) {
 
 
     }
-    std::cout << this->size << std::endl;
     if(countSleeping == size){
+        //if all creatures are sleeping check if they can reproduce
 
         for(size_t i = 0; i < this->creatureContainer.size(); ++i){
 
@@ -60,13 +60,6 @@ void CreatureContainer::update(FoodContainer& foodContainer) {
         }
 
 
-//        for(size_t i = 0; i < this->creatureContainer.size(); ++i){
-//
-//            if(this->creatureContainer[i] == nullptr){
-//                continue;
-//            }
-//
-//        }
 
 
     }
@@ -79,7 +72,7 @@ void CreatureContainer::generate(int quantity) {
     }
 }
 
-void CreatureContainer::updateVision() {
+void CreatureContainer::turnOnVision() {
 
     for(auto& creature : this->creatureContainer){
         if(creature == nullptr){
@@ -88,14 +81,23 @@ void CreatureContainer::updateVision() {
         creature->turnOnVision();
     }
 }
+void CreatureContainer::turnOffVision() {
+    for(auto& creature : this->creatureContainer){
+        if(creature == nullptr){
+            continue;
+        }
+        creature->turnOffVision();
+    }
+}
 
 void CreatureContainer::generateSymmetricaly(size_t quantity,float radius) {
     this->size = quantity;
     int scale = (radius / 10);
 
-    size_t numEachSide = quantity / 4;
-    //TODO this looks absolutely disgusting
-    float spacing = (SCREEN_HEIGHT / ((radius) * 2 * static_cast<float> (quantity))) * static_cast<float>((75 * ((scale == 0) ? 1 : scale)));
+        size_t numEachSide = quantity / 4;
+    //TODO looks absolutely disgusting
+    float spacing = (SCREEN_HEIGHT / ((radius) * 2 * static_cast<float> (quantity))) *
+            static_cast<float>((75 * ((scale == 0) ? 1 : scale)));
 
 
         for(int i = 0; i < 4; ++i){
@@ -140,7 +142,7 @@ CreatureContainer::CreatureContainer(std::unique_ptr<entityFactory> &factory) {
 }
 
 void CreatureContainer::generateNewCreature(size_t index) {
-
+        //TODO GIVE BIRTH FUNCTION
     if(index >= this->creatureContainer.size()){
         throw std::out_of_range("index out of the array");
     }
@@ -177,4 +179,6 @@ void CreatureContainer::cleanUpTheCreature(size_t index) {
     }
 
 }
+
+
 

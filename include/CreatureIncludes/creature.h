@@ -4,6 +4,7 @@
 
 #include "movement.h"
 #include "seeing.h"
+#include "../CreatureIncludes/Genome.h"
 
 #include "../foodInclude/foodContainer.h"
 
@@ -11,22 +12,18 @@
 class Creature {
 private:
     //TODO make code less
-    // tightly coupled by using interfaces in near future
+    //TODO tightly coupled
 
-    Movement movement;
+    std::unique_ptr<Movable> movement;
     Seeing eyes;
 
+    Genome genome;
     Color currentColor{BLUE};
     Color deathColor{BLACK};
 
     size_t foodConsumed{};
 
-    float radiusCreature{};
-    float moveSpeed;
-
     double startingEnergy{5000};
-    double energy{5000};
-
     bool reproductionStatus{false};
     bool isAlive{true};
     bool sleeping{false};
@@ -37,25 +34,28 @@ private:
     void updateMovement(size_t nearestFoodIndex, FoodContainer& foodContainer);
     void updateVision();
     void headToSleep(Vector2 target);
+    bool checkIfShouldReproduce() const;
     void sleep();
 
 public:
 
     //constructors
-    Creature(float x, float y, float radius, float speed, float seeingRange) : radiusCreature{radius}, moveSpeed{speed}
-    {};
+    Creature(Vector2 coord ,float radius, float speed, float seeingRange) : genome{speed,seeingRange,5000,radius}
+    {
+    };
     Creature(){};
+
 
     //public methods
     void render();
     void turnOnVision();
     void update(FoodContainer& foodContainer);
     void wakeUp();
-
+    void turnOffVision();
 
 
     // setters
-    void setMovement(Movement& movement);
+    void setMovement(std::unique_ptr<Movable>& movement);
     void setSeeing(Seeing& eyes);
     //getters
     bool shouldReproduce() const;
