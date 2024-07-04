@@ -9,7 +9,9 @@ public:
 
     bool hasParent{};
     std::unique_ptr<Creature> prepareOne(float xPos, float yPos, float size, float speed, float seeingRange) override;
+    std::unique_ptr<Creature> makeChild(const Genome& parentGenome, Vector2 coord) override;
 
 };
 
-#endif //EXAMPLE_CREATUREFACTORY_H
+
+#endif
