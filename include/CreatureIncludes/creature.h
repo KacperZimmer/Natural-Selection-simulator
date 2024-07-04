@@ -23,7 +23,7 @@ private:
 
     size_t foodConsumed{};
 
-    double startingEnergy{5000};
+    double startingEnergy{1};
     bool reproductionStatus{false};
     bool isAlive{true};
     bool sleeping{false};
@@ -64,6 +64,8 @@ public:
     float getRadius() const;
     float getSpeed() const;
     float seeingRange() const;
+    Genome& getGenome() ;
+
 
     const Vector2& getPosition() const;
     double getEnergy() const;

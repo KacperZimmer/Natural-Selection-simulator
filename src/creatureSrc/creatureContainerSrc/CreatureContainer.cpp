@@ -1,11 +1,15 @@
 #include "../../../include/CreatureIncludes/creatureContainer/CreatureContainer.h"
 #include <iostream>
 
+
 void CreatureContainer::render() {
 
     for(const auto& creature : this->creatureContainer){
+
         if(creature == nullptr){
+
             continue;
+
         }
 
         creature->render();
@@ -13,13 +17,18 @@ void CreatureContainer::render() {
 }
 
 void CreatureContainer::update(FoodContainer& foodContainer) {
-    size_t countSleeping{};
-    for (size_t i = 0; i < this->creatureContainer.size(); ++i) {
 
+    size_t countSleeping{};
+
+    for (size_t i = 0; i < this->creatureContainer.size(); ++i) {
 
         if(this->creatureContainer[i] == nullptr){
             continue;
         }
+        if(creatureContainer[i]->getGenome().getSize() < 0){
+
+        }
+//        std::cout << creatureContainer[i]->getGenome().getSize() << " " << i << std::endl;
 
         if (creatureContainer[i]->isDead()) {
             cleanUpTheCreature(i);
@@ -58,10 +67,6 @@ void CreatureContainer::update(FoodContainer& foodContainer) {
 
             i->wakeUp();
         }
-
-
-
-
     }
 }
 
@@ -81,6 +86,7 @@ void CreatureContainer::turnOnVision() {
         creature->turnOnVision();
     }
 }
+
 void CreatureContainer::turnOffVision() {
     for(auto& creature : this->creatureContainer){
         if(creature == nullptr){
@@ -104,6 +110,7 @@ void CreatureContainer::generateSymmetricaly(size_t quantity,float radius) {
             for(int j = 0; j < numEachSide; ++j) {
 
                 std::unique_ptr<Creature> currentCreature = std::move(factory->prepareOne(
+
                         this->startingXpos,
                         this->startingYpos,
                         radius, 2.f,
@@ -142,20 +149,18 @@ CreatureContainer::CreatureContainer(std::unique_ptr<entityFactory> &factory) {
 }
 
 void CreatureContainer::generateNewCreature(size_t index) {
-        //TODO GIVE BIRTH FUNCTION
+
     if(index >= this->creatureContainer.size()){
         throw std::out_of_range("index out of the array");
     }
 
     this->creatureContainer.emplace_back(
-
             std::move(
-                    factory->prepareOne(
-                        this->creatureContainer[index]->getPosition().x,
-                        this->creatureContainer[index]->getPosition().y,
-                        this->creatureContainer[index]->getRadius(),
-                        this->creatureContainer[index]->getSpeed(),
-                        this->creatureContainer[index]->seeingRange()
+
+                    factory->makeChild(
+                        (this->creatureContainer[index])->getGenome(),
+                        (this->creatureContainer[index]->getPosition())
+
                         )
                     )
         );

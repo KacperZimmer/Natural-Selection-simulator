@@ -18,7 +18,10 @@ void Creature::turnOffVision() {
     //TODO both turn off and turn on can be made into one function
 
     bool currentState = this->eyes.ShouldDisplayVisionRange();
-
+    if(currentState){
+        currentState = false;
+    }
+    this->eyes.setShouldDisplayVisionRange(currentState);
 }
 
 void Creature::render() {
@@ -37,6 +40,7 @@ double Creature::calcEnergyLoss() const {
 void Creature::headToSleep(Vector2 target) {
 
     if(!this->movement->checkIfTargetIsReached(target)) {
+
         movement->goToTarget(movement->getClosestPathToBoundaryVector());
         this->updateEnergy();
 
@@ -110,7 +114,7 @@ void Creature::updateMovement(size_t nearestFoodIndex,FoodContainer& foodContain
 
 void Creature::updateVision() {
 
-    this->eyes.setHightlightPositionVector(this->movement->getPosition());
+        this->eyes.setHightlightPositionVector(this->movement->getPosition());
 
     if(eyes.ShouldDisplayVisionRange()){
         eyes.highlightVisionRange();
@@ -137,6 +141,9 @@ bool Creature::shouldReproduce() const {
 }
 
 
+Genome& Creature::getGenome() {
+    return this->genome;
+}
 
 const Vector2& Creature::getPosition() const{
     return this->movement->getPosition();

@@ -19,7 +19,27 @@ std::unique_ptr<Creature> CreatureFactory::prepareOne(float xPos, float yPos, fl
 }
 
 std::unique_ptr<Creature>
-CreatureFactory::makeChild(const Creature &parenet, Vector2 coord, float radius, float velocity, float seeingRadius) {
-    return {};
+CreatureFactory::makeChild(const Genome& parentGenome, const Vector2 coord) {
+
+    std::unique_ptr<Creature> creature = std::make_unique<Creature>(
+
+            Vector2{coord.x,coord.y}
+    ,parentGenome.getSize(),
+    parentGenome.getVelocity(),
+    parentGenome.getSeeingRadius()
+
+    );
+
+    creature->getGenome().generateGenome(parentGenome);
+
+    std::unique_ptr<Movable> movement = std::make_unique<Movement>(creature->getGenome().getSize(),creature->getGenome().getVelocity() );
+
+    movement->setInitialCreaturePosVector(coord.x, coord.y);
+    Seeing seeing{movement->getPosition(), creature->getGenome().getSeeingRadius()};
+
+    creature->setMovement((movement));
+    creature->setSeeing(seeing);
+
+    return creature;
 }
 

@@ -10,14 +10,15 @@
 
 
 void Simulation::run() {
+
+
     FoodContainer foodContainer{};
-    foodContainer.generateFood(100);
+    foodContainer.generateFood(40);
 
     std::unique_ptr<entityFactory> entityFactorytest = std::make_unique<CreatureFactory>();
-
     CreatureContainer creatureContainer{entityFactorytest};
 
-    creatureContainer.generateSymmetricaly(1000,10.f);
+    creatureContainer.generateSymmetricaly(4,10.f);
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT,"Selection simulator");
 
     SetTargetFPS(60);
