@@ -27,7 +27,7 @@ public:
     float deltatime{};
     void generate(int quantity);
 
-    void update(FoodContainer& foodContainer);
+    void update(FoodContainer& foodContainer, short speedFactor);
     void generateSymmetricaly(size_t quantity, float radius);
     explicit CreatureContainer(std::unique_ptr<entityFactory>& factory);
     void turnOnVision();

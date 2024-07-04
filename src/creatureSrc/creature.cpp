@@ -68,7 +68,7 @@ void Creature::update(FoodContainer& foodContainer) {
     size_t nearestFoodInVectorIndex = this->eyes.isFoodInRange(foodContainer.getFoodArray());
 
     if(nearestFoodInVectorIndex != -1){
-        this->updateMovement(nearestFoodInVectorIndex,foodContainer);
+        this->updateMovement(nearestFoodInVectorIndex,foodContainer, relativeSpeedFactor);
 
     }else if(this->sleeping == true){
 
@@ -93,15 +93,17 @@ void Creature::updateEnergy() {
     this->genome.setEnergy(temp);
 }
 
-void Creature::updateMovement(size_t nearestFoodIndex,FoodContainer& foodContainer) {
+void Creature::updateMovement(size_t nearestFoodIndex,FoodContainer& foodContainer, short speedFactor) {
 
     Vector2 currentPathEndPoint = foodContainer.getVectorAtIndex(nearestFoodIndex);
-
+    float temp{};
+    movement->setRelativeSpeedFactor(speedFactor);
 
     if(!this->movement->checkIfTargetIsReached(currentPathEndPoint)){
         movement->goToTarget(currentPathEndPoint);
+
     }else{
-        float temp = this->genome.getEnergy();
+        temp = this->genome.getEnergy();
         temp += 500;
         this->genome.setEnergy(temp);
         foodContainer.deleteFood(nearestFoodIndex);
@@ -114,7 +116,8 @@ void Creature::updateMovement(size_t nearestFoodIndex,FoodContainer& foodContain
 
 void Creature::updateVision() {
 
-        this->eyes.setHightlightPositionVector(this->movement->getPosition());
+
+    this->eyes.setHightlightPositionVector(this->movement->getPosition());
 
     if(eyes.ShouldDisplayVisionRange()){
         eyes.highlightVisionRange();
@@ -122,6 +125,11 @@ void Creature::updateVision() {
 
 }
 
+
+
+void Creature::setRelativeSpeedFactor(short speedFactor) {
+    this->relativeSpeedFactor = speedFactor;
+}
 
 void Creature::setMovement(std::unique_ptr<Movable>& movement) {
     this->movement = std::move(movement);

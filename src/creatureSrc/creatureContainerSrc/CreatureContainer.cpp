@@ -16,7 +16,7 @@ void CreatureContainer::render() {
     }
 }
 
-void CreatureContainer::update(FoodContainer& foodContainer) {
+void CreatureContainer::update(FoodContainer& foodContainer, short speedFactor) {
 
     size_t countSleeping{};
 
@@ -25,10 +25,9 @@ void CreatureContainer::update(FoodContainer& foodContainer) {
         if(this->creatureContainer[i] == nullptr){
             continue;
         }
-        if(creatureContainer[i]->getGenome().getSize() < 0){
-
+        for(const auto & x : this->creatureContainer){
+            x->setRelativeSpeedFactor(speedFactor);
         }
-//        std::cout << creatureContainer[i]->getGenome().getSize() << " " << i << std::endl;
 
         if (creatureContainer[i]->isDead()) {
             cleanUpTheCreature(i);
@@ -42,10 +41,8 @@ void CreatureContainer::update(FoodContainer& foodContainer) {
 
         creatureContainer[i]->update(foodContainer);
 
-
     }
     if(countSleeping == size){
-        //if all creatures are sleeping check if they can reproduce
 
         for(size_t i = 0; i < this->creatureContainer.size(); ++i){
 
@@ -58,6 +55,7 @@ void CreatureContainer::update(FoodContainer& foodContainer) {
                 ++this->size;
             }
         }
+        foodContainer.generateFood(30);
 
         for(const auto & i : this->creatureContainer){
 
@@ -88,6 +86,7 @@ void CreatureContainer::turnOnVision() {
 }
 
 void CreatureContainer::turnOffVision() {
+
     for(auto& creature : this->creatureContainer){
         if(creature == nullptr){
             continue;
@@ -97,6 +96,7 @@ void CreatureContainer::turnOffVision() {
 }
 
 void CreatureContainer::generateSymmetricaly(size_t quantity,float radius) {
+
     this->size = quantity;
     int scale = (radius / 10);
 
@@ -179,6 +179,8 @@ void CreatureContainer::cleanUpTheCreature(size_t index) {
 
     } else {
         creatureContainer[index].reset();
+        creatureContainer.erase(creatureContainer.begin() + index);
+
         --this->size;
         this->shouldUpdate = 0.f;
     }

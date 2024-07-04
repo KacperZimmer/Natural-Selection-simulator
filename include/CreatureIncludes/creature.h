@@ -29,9 +29,10 @@ private:
     bool sleeping{false};
 
     double calcEnergyLoss() const;
+    short relativeSpeedFactor{};
     void die();
     void updateEnergy();
-    void updateMovement(size_t nearestFoodIndex, FoodContainer& foodContainer);
+    void updateMovement(size_t nearestFoodIndex, FoodContainer& foodContainer, short speedFactor);
     void updateVision();
     void headToSleep(Vector2 target);
     bool checkIfShouldReproduce() const;
@@ -54,9 +55,16 @@ public:
     void turnOffVision();
 
 
+
+
+
+
+
     // setters
     void setMovement(std::unique_ptr<Movable>& movement);
+    void setRelativeSpeedFactor(short speedFactor);
     void setSeeing(Seeing& eyes);
+
     //getters
     bool shouldReproduce() const;
     bool isDead() const;

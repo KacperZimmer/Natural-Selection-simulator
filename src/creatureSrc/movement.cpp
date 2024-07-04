@@ -22,8 +22,8 @@ void Movement::move() {
         this->yDirection *= this->generateRandomDirection();
 
     }else{
-        this->currentPosition.x += static_cast<float>(this->speed * static_cast<float>(xDirection));
-        this->currentPosition.y += static_cast<float>(this-> speed * static_cast<float>(yDirection));
+        this->currentPosition.x += static_cast<float>(this->speed * this->relativeSpeedFactor * static_cast<float>(xDirection));
+        this->currentPosition.y += static_cast<float>(this-> speed * this->relativeSpeedFactor* static_cast<float>(yDirection));
     }
 }
 
@@ -47,8 +47,8 @@ void Movement::goToTarget(const Vector2& target) {
         Vector2 direction = Vector2Normalize(Vector2Subtract(target, this->currentPosition));
 
 
-        this->currentPosition.x += direction.x * this->speed;
-        this->currentPosition.y += direction.y * this->speed;
+        this->currentPosition.x += direction.x * this->speed * this->relativeSpeedFactor;
+        this->currentPosition.y += direction.y * this->speed * this->relativeSpeedFactor;
     }
 
 
@@ -69,6 +69,7 @@ bool Movement::checkIfTargetIsReached(Vector2 target) {
     }
     return false;
 }
+
 
 
 

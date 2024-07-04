@@ -13,6 +13,7 @@ protected:
     Vector2 currentPosition{};
     float creatureRadius{};
     float speed{};
+    short relativeSpeedFactor{1};
 
     void goBackToLegalPositionIfOutOfBound();
 
@@ -26,6 +27,8 @@ public: // methods
     virtual void goToTarget(const Vector2& target) = 0;
     virtual bool checkIfTargetIsReached(Vector2 target) = 0;
     void setInitialCreaturePosVector(float x, float y);
+
+    void setRelativeSpeedFactor(short relativeSpeedFactor);
 
     virtual ~Movable();
 };

@@ -84,3 +84,7 @@ void Movable::setInitialCreaturePosVector(float x, float y) {
 }
 
 Movable::Movable(float creatureRadius, float speed) : creatureRadius(creatureRadius), speed(speed) {}
+
+void Movable::setRelativeSpeedFactor(short relativeSpeedFactor) {
+    this->relativeSpeedFactor = relativeSpeedFactor;
+}
