@@ -189,6 +189,10 @@ double Creature::getEnergy() const {
     return this->genome.getEnergy();
 }
 
+short Creature::getRelativeSpeedFactor() const {
+    return relativeSpeedFactor;
+}
+
 
 
 

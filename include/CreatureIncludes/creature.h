@@ -29,7 +29,7 @@ private:
     bool sleeping{false};
 
     double calcEnergyLoss() const;
-    short relativeSpeedFactor{};
+    short relativeSpeedFactor{1};
     void die();
     void updateEnergy();
     void updateMovement(size_t nearestFoodIndex, FoodContainer& foodContainer, short speedFactor);
@@ -39,6 +39,7 @@ private:
     void sleep();
 
 public:
+    short getRelativeSpeedFactor() const;
 
     //constructors
     Creature(Vector2 coord ,float radius, float speed, float seeingRange) : genome{speed,seeingRange,5000,radius}

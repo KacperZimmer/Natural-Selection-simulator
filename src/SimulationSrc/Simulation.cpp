@@ -13,12 +13,12 @@ void Simulation::run() {
 
 
     FoodContainer foodContainer{};
-    foodContainer.generateFood(0);
+    foodContainer.generateFood(40);
 
     std::unique_ptr<entityFactory> entityFactorytest = std::make_unique<CreatureFactory>();
     CreatureContainer creatureContainer{entityFactorytest};
 
-    creatureContainer.generateSymmetricaly(5,10.f);
+    creatureContainer.generateSymmetricaly(8,10.f);
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT,"Selection simulator");
 
     SetTargetFPS(60);
@@ -28,7 +28,7 @@ void Simulation::run() {
         ClearBackground(WHITE);
 
         creatureContainer.render();
-        creatureContainer.update(foodContainer, 100);
+        creatureContainer.update(foodContainer);
 
         if(GuiButton(Rectangle{0.f, SCREEN_HEIGHT - 50,120,50},"turn on vision")){
 
@@ -40,9 +40,14 @@ void Simulation::run() {
             creatureContainer.turnOffVision();
 
         }
-        if(GuiButton(Rectangle{240, SCREEN_HEIGHT - 50,120,50},"turn off the vision")){
+        if(GuiButton(Rectangle{240, SCREEN_HEIGHT - 50,120,50},"speed up")){
 
-            creatureContainer.turnOffVision();
+            creatureContainer.inreaseRelativeSpeed();
+
+        }
+        if(GuiButton(Rectangle{360, SCREEN_HEIGHT - 50,120,50},"slow down")){
+
+            creatureContainer.slowDownRelativeSpeed();
 
         }
 

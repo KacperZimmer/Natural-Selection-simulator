@@ -16,7 +16,7 @@ void CreatureContainer::render() {
     }
 }
 
-void CreatureContainer::update(FoodContainer& foodContainer, short speedFactor) {
+void CreatureContainer::update(FoodContainer& foodContainer) {
 
     size_t countSleeping{};
 
@@ -24,9 +24,6 @@ void CreatureContainer::update(FoodContainer& foodContainer, short speedFactor) 
 
         if(this->creatureContainer[i] == nullptr){
             continue;
-        }
-        for(const auto & x : this->creatureContainer){
-            x->setRelativeSpeedFactor(speedFactor);
         }
 
         if (creatureContainer[i]->isDead()) {
@@ -40,6 +37,7 @@ void CreatureContainer::update(FoodContainer& foodContainer, short speedFactor) 
 
 
         creatureContainer[i]->update(foodContainer);
+
 
     }
     if(countSleeping == size){
@@ -55,6 +53,7 @@ void CreatureContainer::update(FoodContainer& foodContainer, short speedFactor) 
                 ++this->size;
             }
         }
+
         foodContainer.generateFood(30);
 
         for(const auto & i : this->creatureContainer){
@@ -108,6 +107,7 @@ void CreatureContainer::generateSymmetricaly(size_t quantity,float radius) {
 
         for(int i = 0; i < 4; ++i){
             for(int j = 0; j < numEachSide; ++j) {
+
 
                 std::unique_ptr<Creature> currentCreature = std::move(factory->prepareOne(
 
@@ -185,6 +185,34 @@ void CreatureContainer::cleanUpTheCreature(size_t index) {
         this->shouldUpdate = 0.f;
     }
 
+}
+
+void CreatureContainer::inreaseRelativeSpeed() {
+    short currentRelativeSpeed{};
+    for(const auto & x : this->creatureContainer){
+
+        currentRelativeSpeed = x->getRelativeSpeedFactor();
+        currentRelativeSpeed *= 2;
+        x->setRelativeSpeedFactor(currentRelativeSpeed);
+
+    }
+
+}
+
+void CreatureContainer::slowDownRelativeSpeed() {
+    short currentRelativeSpeed{};
+    for(const auto & x : this->creatureContainer){
+
+        currentRelativeSpeed = x->getRelativeSpeedFactor();
+        currentRelativeSpeed /= 2;
+        if(currentRelativeSpeed >= 1){
+            x->setRelativeSpeedFactor(currentRelativeSpeed);
+
+        }else{
+            x->setRelativeSpeedFactor(1);
+        }
+
+    }
 }
 
 

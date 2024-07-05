@@ -15,9 +15,12 @@ private:
     std::unique_ptr<entityFactory> factory;
     void cleanUpTheCreature(size_t index);
     void generateNewCreature(size_t index);
+
     size_t size{};
 
 public:
+    void slowDownRelativeSpeed();
+    void inreaseRelativeSpeed();
     void render();
     float startingXpos{20};
     float startingYpos{20};
@@ -26,8 +29,9 @@ public:
     float shouldUpdate{};
     float deltatime{};
     void generate(int quantity);
+    void update(FoodContainer& foodContainer);
 
-    void update(FoodContainer& foodContainer, short speedFactor);
+
     void generateSymmetricaly(size_t quantity, float radius);
     explicit CreatureContainer(std::unique_ptr<entityFactory>& factory);
     void turnOnVision();
