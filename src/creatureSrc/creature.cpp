@@ -1,6 +1,6 @@
 #include "../../include/CreatureIncludes/creature.h"
 #include <cmath>
-
+#include <iostream>
 
 
 void Creature::turnOnVision() {
@@ -69,7 +69,7 @@ void Creature::update(FoodContainer& foodContainer) {
 
     if(nearestFoodInVectorIndex != -1){
         this->updateMovement(nearestFoodInVectorIndex,foodContainer, relativeSpeedFactor);
-
+        std::cout << relativeSpeedFactor << std::endl;
     }else if(this->sleeping == true){
 
         this->reproductionStatus = this->checkIfShouldReproduce();
@@ -79,6 +79,8 @@ void Creature::update(FoodContainer& foodContainer) {
         this->headToSleep(movement->getClosestPathToBoundaryVector());
 
     }else{
+        movement->setRelativeSpeedFactor(this->relativeSpeedFactor);
+
         this->movement->move();
         this->updateEnergy();
 
