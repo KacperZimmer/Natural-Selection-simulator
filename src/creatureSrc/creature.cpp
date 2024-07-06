@@ -1,6 +1,6 @@
 #include "../../include/CreatureIncludes/creature.h"
 #include <cmath>
-
+#include <iostream>
 
 
 void Creature::turnOnVision() {
@@ -32,7 +32,7 @@ void Creature::render() {
 double Creature::calcEnergyLoss() const {
 
     //kinetic energy formula scaled by 700 factor
-    return (pow(this->genome.getSize(), 3) * pow(this->getSpeed(),2) ) / 700;
+    return (pow(this->genome.getSize(), 3) * pow(this->getSpeed(),2) ) / 150;
 }
 
 
@@ -68,7 +68,7 @@ void Creature::update(FoodContainer& foodContainer) {
     size_t nearestFoodInVectorIndex = this->eyes.isFoodInRange(foodContainer.getFoodArray());
 
     if(nearestFoodInVectorIndex != -1){
-        this->updateMovement(nearestFoodInVectorIndex,foodContainer, relativeSpeedFactor);
+        this->updateMovement(nearestFoodInVectorIndex,foodContainer, this->getRelativeSpeedFactor());
 
     }else if(this->sleeping == true){
 
@@ -79,6 +79,8 @@ void Creature::update(FoodContainer& foodContainer) {
         this->headToSleep(movement->getClosestPathToBoundaryVector());
 
     }else{
+//        movement->setRelativeSpeedFactor(this->relativeSpeedFactor);
+        movement->setRelativeSpeedFactor(this->genome.getRelativeSpeedFact());
         this->movement->move();
         this->updateEnergy();
 
@@ -128,7 +130,9 @@ void Creature::updateVision() {
 
 
 void Creature::setRelativeSpeedFactor(short speedFactor) {
-    this->relativeSpeedFactor = speedFactor;
+
+    this->genome.setRelativeSpeedFact(speedFactor);
+
 }
 
 void Creature::setMovement(std::unique_ptr<Movable>& movement) {
@@ -185,6 +189,10 @@ bool Creature::checkIfShouldReproduce() const {
 
 double Creature::getEnergy() const {
     return this->genome.getEnergy();
+}
+
+short Creature::getRelativeSpeedFactor() const {
+    return genome.getRelativeSpeedFact();
 }
 
 

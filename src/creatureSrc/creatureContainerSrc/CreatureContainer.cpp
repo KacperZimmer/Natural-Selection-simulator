@@ -16,7 +16,7 @@ void CreatureContainer::render() {
     }
 }
 
-void CreatureContainer::update(FoodContainer& foodContainer, short speedFactor) {
+void CreatureContainer::update(FoodContainer& foodContainer) {
 
     size_t countSleeping{};
 
@@ -24,9 +24,6 @@ void CreatureContainer::update(FoodContainer& foodContainer, short speedFactor) 
 
         if(this->creatureContainer[i] == nullptr){
             continue;
-        }
-        for(const auto & x : this->creatureContainer){
-            x->setRelativeSpeedFactor(speedFactor);
         }
 
         if (creatureContainer[i]->isDead()) {
@@ -41,16 +38,18 @@ void CreatureContainer::update(FoodContainer& foodContainer, short speedFactor) 
 
         creatureContainer[i]->update(foodContainer);
 
+        std::cout << creatureContainer[i]->getEnergy() << std::endl;
+
     }
     if(countSleeping == size){
 
-        for(size_t i = 0; i < this->creatureContainer.size(); ++i){
+        for(size_t i = 0; i < this->creatureContainer.size(); ++i) {
 
-            if(this->creatureContainer[i] == nullptr){
+            if (this->creatureContainer[i] == nullptr) {
                 continue;
             }
 
-            if(creatureContainer[i]->shouldReproduce() == true) {
+            if (creatureContainer[i]->shouldReproduce() == true) {
                 this->generateNewCreature(i);
                 ++this->size;
             }
@@ -108,6 +107,7 @@ void CreatureContainer::generateSymmetricaly(size_t quantity,float radius) {
 
         for(int i = 0; i < 4; ++i){
             for(int j = 0; j < numEachSide; ++j) {
+
 
                 std::unique_ptr<Creature> currentCreature = std::move(factory->prepareOne(
 
@@ -185,6 +185,38 @@ void CreatureContainer::cleanUpTheCreature(size_t index) {
         this->shouldUpdate = 0.f;
     }
 
+}
+
+void CreatureContainer::inreaseRelativeSpeed() {
+    short currentRelativeSpeed{};
+    for(const auto & x : this->creatureContainer){
+
+        currentRelativeSpeed = x->getRelativeSpeedFactor();
+        currentRelativeSpeed *= 2;
+        if(currentRelativeSpeed <= 8) {
+            x->setRelativeSpeedFactor(currentRelativeSpeed);
+        }else{
+            x->setRelativeSpeedFactor(8);
+        }
+
+    }
+
+}
+
+void CreatureContainer::slowDownRelativeSpeed() {
+    short currentRelativeSpeed{};
+    for(const auto & x : this->creatureContainer){
+
+        currentRelativeSpeed = x->getRelativeSpeedFactor();
+        currentRelativeSpeed /= 2;
+        if(currentRelativeSpeed >= 1){
+            x->setRelativeSpeedFactor(currentRelativeSpeed);
+
+        }else{
+            x->setRelativeSpeedFactor(1);
+        }
+
+    }
 }
 
 

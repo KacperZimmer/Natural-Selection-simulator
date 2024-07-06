@@ -28,6 +28,7 @@ void Movement::move() {
 }
 
 int Movement::generateRandomDirection() const{
+
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<int> dis(0, 1);
@@ -56,6 +57,7 @@ void Movement::goToTarget(const Vector2& target) {
 
 
 Movement::Movement(float creatureRadius, float speed) : Movable(creatureRadius, speed) {
+
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_real_distribution<> dis(0.0169255, 0.05);

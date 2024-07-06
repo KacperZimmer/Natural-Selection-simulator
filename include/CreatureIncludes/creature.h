@@ -29,22 +29,39 @@ private:
     bool sleeping{false};
 
     double calcEnergyLoss() const;
-    short relativeSpeedFactor{};
+
+
     void die();
+
     void updateEnergy();
-    void updateMovement(size_t nearestFoodIndex, FoodContainer& foodContainer, short speedFactor);
+
+    void updateMovement(size_t nearestFoodIndex, FoodContainer &foodContainer, short speedFactor);
+
     void updateVision();
+
     void headToSleep(Vector2 target);
+
     bool checkIfShouldReproduce() const;
+
     void sleep();
 
 public:
+    short getRelativeSpeedFactor() const;
 
     //constructors
-    Creature(Vector2 coord ,float radius, float speed, float seeingRange) : genome{speed,seeingRange,5000,radius}
+    Creature(Vector2 coord, float radius, float speed, float seeingRange) :
+
+              genome{speed, seeingRange, 5000, radius, 1} {
+    }
+
+    Creature();
+
+    Creature(Vector2 coord, float radius, float speed, float seeingRange, short relativeSpeedFactor)
+            : genome{speed, seeingRange, 5000, radius, relativeSpeedFactor}
     {
-    };
-    Creature(){};
+
+    }
+
 
 
     //public methods

@@ -65,7 +65,6 @@ bool Genome::shouldGeneMutate() const {
     return false;
 }
 
-Genome::Genome(float velocity, float radius, double energy, float sizeRadius) : velocity(velocity), seeingRadius(radius), energy(energy), size(sizeRadius){}
 
 Genome::Genome() {}
 
@@ -105,4 +104,20 @@ double Genome::getEnergy() const {
 }
 Genome::~Genome() {
 
+}
+
+Genome::Genome(float velocity, float radius, double energy, float sizeRadius, short relativeSpeed) {
+    this->velocity = velocity;
+    this->seeingRadius = radius;
+    this->energy = energy;
+    this->size = sizeRadius;
+    this->relativeSpeedFact = relativeSpeed;
+}
+
+short Genome::getRelativeSpeedFact() const {
+    return relativeSpeedFact;
+}
+
+void Genome::setRelativeSpeedFact(short relativeSpeedFact) {
+    Genome::relativeSpeedFact = relativeSpeedFact;
 }

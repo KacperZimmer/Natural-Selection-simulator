@@ -26,7 +26,8 @@ CreatureFactory::makeChild(const Genome& parentGenome, const Vector2 coord) {
             Vector2{coord.x,coord.y}
     ,parentGenome.getSize(),
     parentGenome.getVelocity(),
-    parentGenome.getSeeingRadius()
+    parentGenome.getSeeingRadius(),
+    parentGenome.getRelativeSpeedFact()
 
     );
 
