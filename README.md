@@ -28,7 +28,7 @@ This project is a Natural Selection Simulator where organisms are represented by
 
 4. **Energy Consumption:**
     - Organisms lose energy according to the formula:
-      $\ ((size_radius)^3 * (velocity)^2) / 150$
+      $\ ((radius)^3 * (velocity)^2) / 150$
 ## How to Use
 
 1. **Starting the Simulation:**
