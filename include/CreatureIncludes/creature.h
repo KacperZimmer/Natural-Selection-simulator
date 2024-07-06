@@ -23,27 +23,45 @@ private:
 
     size_t foodConsumed{};
 
-    double startingEnergy{5000};
+    double startingEnergy{1};
     bool reproductionStatus{false};
     bool isAlive{true};
     bool sleeping{false};
 
     double calcEnergyLoss() const;
+
+
     void die();
+
     void updateEnergy();
-    void updateMovement(size_t nearestFoodIndex, FoodContainer& foodContainer);
+
+    void updateMovement(size_t nearestFoodIndex, FoodContainer &foodContainer, short speedFactor);
+
     void updateVision();
+
     void headToSleep(Vector2 target);
+
     bool checkIfShouldReproduce() const;
+
     void sleep();
 
 public:
+    short getRelativeSpeedFactor() const;
 
     //constructors
-    Creature(Vector2 coord ,float radius, float speed, float seeingRange) : genome{speed,seeingRange,5000,radius}
+    Creature(Vector2 coord, float radius, float speed, float seeingRange) :
+
+              genome{speed, seeingRange, 5000, radius, 1} {
+    }
+
+    Creature();
+
+    Creature(Vector2 coord, float radius, float speed, float seeingRange, short relativeSpeedFactor)
+            : genome{speed, seeingRange, 5000, radius, relativeSpeedFactor}
     {
-    };
-    Creature(){};
+
+    }
+
 
 
     //public methods
@@ -54,9 +72,16 @@ public:
     void turnOffVision();
 
 
+
+
+
+
+
     // setters
     void setMovement(std::unique_ptr<Movable>& movement);
+    void setRelativeSpeedFactor(short speedFactor);
     void setSeeing(Seeing& eyes);
+
     //getters
     bool shouldReproduce() const;
     bool isDead() const;
@@ -64,6 +89,8 @@ public:
     float getRadius() const;
     float getSpeed() const;
     float seeingRange() const;
+    Genome& getGenome() ;
+
 
     const Vector2& getPosition() const;
     double getEnergy() const;

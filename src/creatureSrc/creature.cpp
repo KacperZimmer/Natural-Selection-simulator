@@ -1,6 +1,6 @@
 #include "../../include/CreatureIncludes/creature.h"
 #include <cmath>
-
+#include <iostream>
 
 
 void Creature::turnOnVision() {
@@ -18,7 +18,10 @@ void Creature::turnOffVision() {
     //TODO both turn off and turn on can be made into one function
 
     bool currentState = this->eyes.ShouldDisplayVisionRange();
-
+    if(currentState){
+        currentState = false;
+    }
+    this->eyes.setShouldDisplayVisionRange(currentState);
 }
 
 void Creature::render() {
@@ -29,7 +32,7 @@ void Creature::render() {
 double Creature::calcEnergyLoss() const {
 
     //kinetic energy formula scaled by 700 factor
-    return (pow(this->genome.getSize(), 3) * pow(this->getSpeed(),2) ) / 700;
+    return (pow(this->genome.getSize(), 3) * pow(this->getSpeed(),2) ) / 150;
 }
 
 
@@ -37,6 +40,7 @@ double Creature::calcEnergyLoss() const {
 void Creature::headToSleep(Vector2 target) {
 
     if(!this->movement->checkIfTargetIsReached(target)) {
+
         movement->goToTarget(movement->getClosestPathToBoundaryVector());
         this->updateEnergy();
 
@@ -64,7 +68,7 @@ void Creature::update(FoodContainer& foodContainer) {
     size_t nearestFoodInVectorIndex = this->eyes.isFoodInRange(foodContainer.getFoodArray());
 
     if(nearestFoodInVectorIndex != -1){
-        this->updateMovement(nearestFoodInVectorIndex,foodContainer);
+        this->updateMovement(nearestFoodInVectorIndex,foodContainer, this->getRelativeSpeedFactor());
 
     }else if(this->sleeping == true){
 
@@ -75,6 +79,8 @@ void Creature::update(FoodContainer& foodContainer) {
         this->headToSleep(movement->getClosestPathToBoundaryVector());
 
     }else{
+//        movement->setRelativeSpeedFactor(this->relativeSpeedFactor);
+        movement->setRelativeSpeedFactor(this->genome.getRelativeSpeedFact());
         this->movement->move();
         this->updateEnergy();
 
@@ -89,15 +95,17 @@ void Creature::updateEnergy() {
     this->genome.setEnergy(temp);
 }
 
-void Creature::updateMovement(size_t nearestFoodIndex,FoodContainer& foodContainer) {
+void Creature::updateMovement(size_t nearestFoodIndex,FoodContainer& foodContainer, short speedFactor) {
 
     Vector2 currentPathEndPoint = foodContainer.getVectorAtIndex(nearestFoodIndex);
-
+    float temp{};
+    movement->setRelativeSpeedFactor(speedFactor);
 
     if(!this->movement->checkIfTargetIsReached(currentPathEndPoint)){
         movement->goToTarget(currentPathEndPoint);
+
     }else{
-        float temp = this->genome.getEnergy();
+        temp = this->genome.getEnergy();
         temp += 500;
         this->genome.setEnergy(temp);
         foodContainer.deleteFood(nearestFoodIndex);
@@ -110,6 +118,7 @@ void Creature::updateMovement(size_t nearestFoodIndex,FoodContainer& foodContain
 
 void Creature::updateVision() {
 
+
     this->eyes.setHightlightPositionVector(this->movement->getPosition());
 
     if(eyes.ShouldDisplayVisionRange()){
@@ -118,6 +127,13 @@ void Creature::updateVision() {
 
 }
 
+
+
+void Creature::setRelativeSpeedFactor(short speedFactor) {
+
+    this->genome.setRelativeSpeedFact(speedFactor);
+
+}
 
 void Creature::setMovement(std::unique_ptr<Movable>& movement) {
     this->movement = std::move(movement);
@@ -137,6 +153,9 @@ bool Creature::shouldReproduce() const {
 }
 
 
+Genome& Creature::getGenome() {
+    return this->genome;
+}
 
 const Vector2& Creature::getPosition() const{
     return this->movement->getPosition();
@@ -170,6 +189,10 @@ bool Creature::checkIfShouldReproduce() const {
 
 double Creature::getEnergy() const {
     return this->genome.getEnergy();
+}
+
+short Creature::getRelativeSpeedFactor() const {
+    return genome.getRelativeSpeedFact();
 }
 
 
