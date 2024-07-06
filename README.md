@@ -26,9 +26,9 @@ This project is a Natural Selection Simulator where organisms are represented by
         - **Vision Range:** How far the organism can see.
         - **Size:** The physical size of the organism.
 
-- Organisms lose energy according to the formula:
-This sentence uses `$\sqrt{3x-1}+(1+x)^2$` delimiters to show math inline: $\sqrt{3x-1}+(1+x)^2$
-
+4. **Energy Consumption:**
+    - Organisms lose energy according to the formula:
+      $\ ((size_radius)^3 * (velocity)^2) / 150$
 ## How to Use
 
 1. **Starting the Simulation:**
