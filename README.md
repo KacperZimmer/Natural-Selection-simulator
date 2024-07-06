@@ -11,7 +11,7 @@ This project is a Natural Selection Simulator where organisms are represented by
 
 ## Simulation Rules
 
-1. **Food Consumption:** 
+1. **Food Consumption:**
     - Each blue organism (representing an entity) seeks out green circles (food).
     - An organism must find and consume food to maintain its energy levels.
 
@@ -26,20 +26,16 @@ This project is a Natural Selection Simulator where organisms are represented by
         - **Vision Range:** How far the organism can see.
         - **Size:** The physical size of the organism.
 
-4. **Energy Consumption:**
-   Organisms lose energy according to the formula: 
-    \[ \text{Energy Loss} = \frac{{(\text{genome.getSize()})^3 \times (\text{getSpeed()})^2}}{150} \]
-
-
-
+- Organisms lose energy according to the formula:
+  This sentence uses $\` and \`$ delimiters to show math inline:  $'x^2'$
 ## How to Use
 
 1. **Starting the Simulation:**
     - Initiate the simulation to observe the blue organisms move towards green food items.
-  
+
 2. **Toggling Vision Radius:**
     - Enable or disable the vision radius to see how organisms perceive their environment.
-  
+
 3. **Adjusting Speed:**
     - Use the controls to speed up or slow down the simulation to better understand the behavior and interactions of the organisms.
 
