@@ -42,7 +42,7 @@ This project is a Natural Selection Simulator where organisms are represented by
 
 ## Development
 
-- The simulation is built using the Oto [raylib library]("[https://github.com/ "GitHub - Where the world builds software](https://github.com/raysan5/raylib)").
+- The simulation is built using the [raylib library]("[https://github.com/ "GitHub - Where the world builds software](https://github.com/raysan5/raylib)").
  library in **C++**.
 - Future updates will include data visualization tools and a comprehensive menu system.
 
