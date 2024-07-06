@@ -28,9 +28,8 @@ This project is a Natural Selection Simulator where organisms are represented by
 
 4. **Energy Consumption:**
     - Organisms lose energy according to the formula:
-      \[
-      \text{Energy Loss} = \frac{\text{Size}^3 \times \text{Speed}^2}{150}
-      \]
+     \[ \text{Energy Loss} = \frac{{(\text{genome.getSize()})^3 \times (\text{getSpeed()})^2}}{150} \]
+
 
 ## How to Use
 
