@@ -27,7 +27,7 @@ This project is a Natural Selection Simulator where organisms are represented by
         - **Size:** The physical size of the organism.
 
 - Organisms lose energy according to the formula:
-  This sentence uses $\` and \`$ delimiters to show math inline:  ${'x^2'}$
+  This sentence uses $\` and \`$ delimiters to show math inline:  $['x^2']$
 ## How to Use
 
 1. **Starting the Simulation:**
