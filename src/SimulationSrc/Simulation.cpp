@@ -13,7 +13,7 @@ void Simulation::run() {
 
 
     FoodContainer foodContainer{};
-    foodContainer.generateFood(40);
+    foodContainer.generateFood(10);
 
     std::unique_ptr<entityFactory> entityFactorytest = std::make_unique<CreatureFactory>();
     CreatureContainer creatureContainer{entityFactorytest};

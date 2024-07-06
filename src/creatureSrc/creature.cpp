@@ -68,8 +68,8 @@ void Creature::update(FoodContainer& foodContainer) {
     size_t nearestFoodInVectorIndex = this->eyes.isFoodInRange(foodContainer.getFoodArray());
 
     if(nearestFoodInVectorIndex != -1){
-        this->updateMovement(nearestFoodInVectorIndex,foodContainer, relativeSpeedFactor);
-        std::cout << relativeSpeedFactor << std::endl;
+        this->updateMovement(nearestFoodInVectorIndex,foodContainer, this->getRelativeSpeedFactor());
+
     }else if(this->sleeping == true){
 
         this->reproductionStatus = this->checkIfShouldReproduce();
@@ -79,8 +79,8 @@ void Creature::update(FoodContainer& foodContainer) {
         this->headToSleep(movement->getClosestPathToBoundaryVector());
 
     }else{
-        movement->setRelativeSpeedFactor(this->relativeSpeedFactor);
-
+//        movement->setRelativeSpeedFactor(this->relativeSpeedFactor);
+        movement->setRelativeSpeedFactor(this->genome.getRelativeSpeedFact());
         this->movement->move();
         this->updateEnergy();
 
@@ -130,7 +130,9 @@ void Creature::updateVision() {
 
 
 void Creature::setRelativeSpeedFactor(short speedFactor) {
-    this->relativeSpeedFactor = speedFactor;
+
+    this->genome.setRelativeSpeedFact(speedFactor);
+
 }
 
 void Creature::setMovement(std::unique_ptr<Movable>& movement) {
@@ -190,7 +192,7 @@ double Creature::getEnergy() const {
 }
 
 short Creature::getRelativeSpeedFactor() const {
-    return relativeSpeedFactor;
+    return genome.getRelativeSpeedFact();
 }
 
 

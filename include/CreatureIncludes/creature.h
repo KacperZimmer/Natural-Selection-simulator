@@ -30,7 +30,6 @@ private:
 
     double calcEnergyLoss() const;
 
-    short relativeSpeedFactor{1};
 
     void die();
 
@@ -50,9 +49,9 @@ public:
     short getRelativeSpeedFactor() const;
 
     //constructors
-    Creature(Vector2 coord, float radius, float speed, float seeingRange)
-            : relativeSpeedFactor{1},
-              genome{speed, seeingRange, 5000, radius, this->relativeSpeedFactor} {
+    Creature(Vector2 coord, float radius, float speed, float seeingRange) :
+
+              genome{speed, seeingRange, 5000, radius, 1} {
     }
 
     Creature();
