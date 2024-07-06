@@ -58,6 +58,3 @@ void Simulation::run() {
     }
 }
 
-void Simulation::speedUpAnimation(short factor) {
-
-}

@@ -38,6 +38,7 @@ void CreatureContainer::update(FoodContainer& foodContainer) {
 
         creatureContainer[i]->update(foodContainer);
 
+        std::cout << creatureContainer[i]->getEnergy() << std::endl;
 
     }
     if(countSleeping == size){
@@ -192,7 +193,11 @@ void CreatureContainer::inreaseRelativeSpeed() {
 
         currentRelativeSpeed = x->getRelativeSpeedFactor();
         currentRelativeSpeed *= 2;
-        x->setRelativeSpeedFactor(currentRelativeSpeed);
+        if(currentRelativeSpeed <= 8) {
+            x->setRelativeSpeedFactor(currentRelativeSpeed);
+        }else{
+            x->setRelativeSpeedFactor(8);
+        }
 
     }
 

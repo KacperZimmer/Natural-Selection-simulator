@@ -5,7 +5,6 @@
 
 class Simulation {
 private:
-    void speedUpAnimation(short factor);
 public:
     static void run();
 };

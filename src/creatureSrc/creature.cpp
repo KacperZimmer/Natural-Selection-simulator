@@ -32,7 +32,7 @@ void Creature::render() {
 double Creature::calcEnergyLoss() const {
 
     //kinetic energy formula scaled by 700 factor
-    return (pow(this->genome.getSize(), 3) * pow(this->getSpeed(),2) ) / 700;
+    return (pow(this->genome.getSize(), 3) * pow(this->getSpeed(),2) ) / 150;
 }
 
 
