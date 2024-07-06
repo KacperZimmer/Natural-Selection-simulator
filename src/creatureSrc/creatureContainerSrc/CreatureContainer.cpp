@@ -42,18 +42,17 @@ void CreatureContainer::update(FoodContainer& foodContainer) {
     }
     if(countSleeping == size){
 
-        for(size_t i = 0; i < this->creatureContainer.size(); ++i){
+        for(size_t i = 0; i < this->creatureContainer.size(); ++i) {
 
-            if(this->creatureContainer[i] == nullptr){
+            if (this->creatureContainer[i] == nullptr) {
                 continue;
             }
 
-            if(creatureContainer[i]->shouldReproduce() == true) {
+            if (creatureContainer[i]->shouldReproduce() == true) {
                 this->generateNewCreature(i);
                 ++this->size;
             }
         }
-
         foodContainer.generateFood(30);
 
         for(const auto & i : this->creatureContainer){
