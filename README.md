@@ -36,10 +36,10 @@ This project is a Natural Selection Simulator where organisms are represented by
 
 2. **Toggling Vision Radius:**
     - Enable or disable the vision radius to see how organisms perceive their environment.
-![Enabled Vision Radius](url_to_enabled_image.png)
+![Enabled Vision Radius](https://github.com/KacperZimmer/Natural-Selection-simulator/blob/main/img/vision_range_on.png)
    *Image showing the enabled vision radius.*
 
-   ![Disabled Vision Radius](url_to_disabled_image.png)
+   ![Disabled Vision Radius](https://github.com/KacperZimmer/Natural-Selection-simulator/blob/main/img/vision_range_off.png)
    *Image showing the disabled vision radius.*
 
 3. **Adjusting Speed:**
